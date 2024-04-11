@@ -1,7 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 
 function Home() {
-    let navigate = useNavigate()
     return (
         <>
             <h1 className="flex justify-center text-3xl mt-5">
