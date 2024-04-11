@@ -2,7 +2,7 @@ function Produto() {
     return(
         <>
         <div className="container flex flex-col mx-auto items-center">
-            <h1 className="text-4xl text-center my-8">Cadastrar Categoria</h1>
+            <h1 className="text-4xl text-center my-8">Cadastrar Produtos</h1>
 
             <form className="flex flex-col w-1/2 gap-4">
                 <div className="flex flex-col gap-2">

@@ -5,7 +5,7 @@ import Categoria from "../../models/Categoria";
 import ModalCategoria from "../../componentes/modal/ModalCategoria";
 
 
-export default function Categorias() {
+export default function ListCategorias() {
 
     //inject service
     const service = new CategoriaService();

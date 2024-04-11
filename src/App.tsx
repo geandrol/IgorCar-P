@@ -4,9 +4,10 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import Clientes from './pages/cliente/Clientes'
 
-import Produtos from './pages/produtos/Produtos'
 import Home from './pages/home/Home'
-import Categorias from './pages/categorias/Categorias'
+import Estoque from './pages/estoque/Estoque'
+import ListCategorias from './pages/categorias/ListCategorias'
+import ListProdutos from './pages/produtos/ListProdutos'
 
 function App() {
 
@@ -16,8 +17,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/cliente" element={<Clientes />} />
-        <Route path="/categoria" element={<Categorias />} />
-        <Route path="/produto" element={<Produtos />} />
+        <Route path="/listarCategoria" element={<ListCategorias />} />
+        <Route path="/listarProduto" element={<ListProdutos />} />
+        <Route path="/estoque" element={<Estoque />} />
       </Routes>
   </BrowserRouter>
   )
