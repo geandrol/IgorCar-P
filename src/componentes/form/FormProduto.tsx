@@ -5,7 +5,6 @@ import Produto from "../../models/Produto";
 function FormProduto() {
     const service = new ProdutoService();
     const [produto, setProduto] = useState<Produto>({} as Produto);
-    const [produtos, setProdutos] = useState<Produto[]>([]);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setProduto({
@@ -18,7 +17,7 @@ function FormProduto() {
         const response = await service.getAll()
         console.log(response)
 
-        setProdutos(response)
+        setProduto(response)
     }
     useEffect(() => {
         getAll()
