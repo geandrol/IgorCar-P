@@ -14,7 +14,7 @@ export default function ListCategorias() {
     const [categorias, setCategorias] = useState<Categoria[]>([]);
 
     async function getAll() {
-        const response = await service.getAll()
+        const response = await service.getAlll()
         console.log(response)
 
         setCategorias(response)

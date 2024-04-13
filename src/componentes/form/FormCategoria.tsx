@@ -5,8 +5,6 @@ import Categoria from "../../models/Categoria";
 function FormCategoria() {
     const service = new CategoriaService();
     const [categoria, setCategoria] = useState<Categoria>({} as Categoria);
-    const [categorias, setCategorias] = useState<Categoria[]>([]);
-
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setCategoria({
             ...categoria,
@@ -18,7 +16,7 @@ function FormCategoria() {
         const response = await service.getAlll()
         console.log(response)
 
-        setCategorias(response)
+        setCategoria(response)
     }
     useEffect(() => {
         getAll()

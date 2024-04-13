@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import  { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import ProdutoService from "../../service/ProdutoService";
 import Produto from "../../models/Produto";
 import CategoriaService from "../../service/CategoriaService";
