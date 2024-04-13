@@ -22,6 +22,7 @@ export default function ListProdutos() {
         setProdutos(response)
     }
 
+
     useEffect(() => {
         getAll()
     }, [])
@@ -53,7 +54,7 @@ export default function ListProdutos() {
             </div>
 
 
-            <div className="flex justify-between border-2 border-sky-500 grid grid-cols-7 gap-1 ms-5 me-5">
+            <div className="flex justify-between border-2 border-sky-500 grid grid-cols-8 gap-1 ms-5 me-5">
                 <div>
                     <h1>Nome</h1>
                 </div>
@@ -73,13 +74,16 @@ export default function ListProdutos() {
                     <h1>Valor Venda</h1>
                 </div>
                 <div>
+                    <h1>Categoria</h1>
+                </div>
+                <div>
                     <h1></h1>
                 </div>
             </div>
 
             {
                 filteredProdutos.map((item) =>
-                    <div className="flex justify-between border-2 border-sky-500 grid grid-cols-7 gap-1 ms-5 me-5">
+                    <div className="flex justify-between border-2 border-sky-500 grid grid-cols-8 gap-1 ms-5 me-5">
                         <div>
                             <div className="flex-1 min-w-0 ">
                                 <div className="font-bold text-xl ">{item.nome}</div>
@@ -106,7 +110,12 @@ export default function ListProdutos() {
                         </div>
                         <div>
                             <div className="flex-1 min-w-0">
-                                <div className="font-bold text-xl ">{item.valorVenda}</div>
+                                <div className="font-bold text-xl ">{item.valorVendal}</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div className="flex-1 min-w-0">
+                                <div className="font-bold text-xl ">{item.categoria?.descricao}</div>
                             </div>
                         </div>
                         <div className="">

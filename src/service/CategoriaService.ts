@@ -6,7 +6,7 @@ const api = axios.create({
 })
 export default class CategoriaService {
 
-    async getAll() {
+    async getAlll() {
         const response = await api.get('categoria')
         return response.data
     }

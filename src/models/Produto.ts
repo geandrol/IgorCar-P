@@ -9,7 +9,7 @@ export default interface Produto {
     categoria: Categoria | null;
     quantidade: number; 
     valorCusto: number; 
-    valorVenda: number; 
+    valorVendal: number; 
     descricao?: string; 
 
 }
