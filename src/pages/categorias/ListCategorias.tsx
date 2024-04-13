@@ -3,10 +3,11 @@ import { useEffect, useState } from "react"
 import CategoriaService from "../../service/CategoriaService";
 import Categoria from "../../models/Categoria";
 import ModalCategoria from "../../componentes/modal/ModalCategoria";
+import { FaSyncAlt, FaTrash } from "react-icons/fa";
 
 
 export default function ListCategorias() {
-
+    const [buscarPorCategoria, setBuscarPorCategoria] = useState("");
     //inject service
     const service = new CategoriaService();
 
@@ -23,58 +24,57 @@ export default function ListCategorias() {
         getAll()
     }, [])
 
+    const filteredCategorias = categorias.filter((categoria) =>
+        categoria.descricao.toLowerCase().includes(buscarPorCategoria.toLowerCase())
+    );
+
     return (
 
         <>
 
             <div className="container mx-auto flex flex-col items-center">
                 <ModalCategoria />
-                {/* <div className="mx-auto flex flex-row space-x-10 justify-center px-4 py-8">
+
+            </div>
+
+            <div className="flex justify-center m-5">
+                <h1 className="pe-2">Buscar por categoria: </h1>
+                <input
+                    className="border-2 border-sky-500"
+                    type="text"
+                    placeholder="Buscar por nome..."
+                    value={buscarPorCategoria}
+                    onChange={(e) => setBuscarPorCategoria(e.target.value)}
+                />
+            </div>
+
+            <div className="flex justify-center">
+                <div className=''>
+                <h1>Descrição</h1>
                     {
-                        categorias.map((item) =>
-                            <div className="max-w-sm min-w-[250px] rounded overflow-hidden shadow-lg h-36">
-                                <div className="px-6 py-4">
-                                    <div className="font-bold text-xl mb-2">{item.descricao}</div>
-                                </div>
-                                <div className="flex justify-around items-center">
-                                    <button className="bg-indigo-300 hover:bg-indigo-100 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
-                                        <img width="30" height="30" src="https://img.icons8.com/ios-filled/50/restart--v1.png" alt="restart--v1" />
-                                    </button>
-                                    <button className="bg-red-400 hover:bg-red-200 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
-                                        <img width="30" height="30" src="https://img.icons8.com/ios/50/empty-trash.png" alt="empty-trash" />
-                                    </button>
-                                </div>
-                            </div>
+                        filteredCategorias.map((item) =>
+                            <ul className="max-w-md divide-y divide-gray-200 dark:divide-gray-700 ">
+                                <li className="pb-3 sm:pb-1 sm:pt-1 sm:pe-1 border-2">
+                                    <div className="flex items-center space-x-4 rtl:space-x-reverse">
+                                        <div className="flex-shrink-0">
+                                          
+                                        </div>
+                                        <div className="flex-1 min-w-0">
+                                            <div className="font-bold text-xl ">{item.descricao}</div>
+                                        </div>
+                                        <div className="flex justify-around items-center sm:ps-12">
+                                            <button className="font-bold text-xl bg-indigo-300 hover:bg-indigo-100 py-1 px-4 rounded inline-flex items-center">
+                                                <FaSyncAlt />
+                                            </button>
+                                            <button className="bg-red-400 hover:bg-red-200 text-gray-800 font-bold py-1 px-4 rounded inline-flex items-center">
+                                                <FaTrash />
+                                            </button>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
                         )}
-                </div> */}
-            </div>
-
-       <div className="flex justify-center">
-            <div className=''>
-                {
-                    categorias.map((item) =>
-                        <ul className="max-w-md divide-y divide-gray-200 dark:divide-gray-700 ">
-                            <li className="pb-3 sm:pb-1 sm:pt-1 sm:pe-1 border-2">
-                                <div className="flex items-center space-x-4 rtl:space-x-reverse">
-                                    <div className="flex-shrink-0">
-
-                                    </div>
-                                    <div className="flex-1 min-w-0">
-                                    <div className="font-bold text-xl ">{item.descricao}</div>
-                                    </div>
-                                    <div className="flex justify-around items-center sm:ps-12">
-                                        <button className="bg-indigo-300 hover:bg-indigo-100 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
-                                            <img width="20" height="30" src="https://img.icons8.com/ios-filled/50/restart--v1.png" alt="restart--v1" />
-                                        </button>
-                                        <button className="bg-red-400 hover:bg-red-200 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
-                                            <img width="20" height="30" src="https://img.icons8.com/ios/50/empty-trash.png" alt="empty-trash" />
-                                        </button>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    )}
-            </div>
+                </div>
             </div>
         </>
 

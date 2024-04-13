@@ -3,21 +3,47 @@ import { Link } from "react-router-dom";
 function Estoque() {
     return (
         <>
-            <div className="flex justify-around items-center sm:ps-12">
+          
+            <div className="grid grid-cols-2 gap-1">
+                <div className="flex justify-center ms-4 me-4 mt-10">
+                    <div className=" bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
 
-                <Link to='/listarProduto' className='hover:underline'>
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
-                        Produtos
-                    </button>
+                        <h5 className="flex justify-center mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Produtos</h5>
 
-                </Link>
+                        <div className="p-5">
 
-                <Link to='/listarCategoria' className='hover:underline'>
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
-                       Categorias
-                    </button>
+                            <div className="flex justify-center mt-6 ">
+                                <Link to='/listarProduto' className='hover:underline'>
+                                    <button className="m-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
+                                        Entrar
+                                    </button>
 
-                </Link>
+                                </Link>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div className="flex justify-center ms-4 me-4 mt-10">
+                    <div className=" bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+
+                        <h5 className="flex justify-center mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Categorias</h5>
+
+                        <div className="p-5">
+
+                            <div className="flex justify-center  mt-6">
+                                <Link to='/listarCategoria' className='hover:underline'>
+                                    <button className="m-6 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
+                                        Entrar
+                                    </button>
+
+                                </Link>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </>
     )

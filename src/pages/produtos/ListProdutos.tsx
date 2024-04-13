@@ -2,10 +2,14 @@ import { useEffect, useState } from "react"
 import Produto from "../../models/Produto";
 import ProdutoService from "../../service/ProdutoService";
 import ModalProduto from "../../componentes/modal/ModalProduto";
+import './ListProdutos.css'
+import { FaTrash, FaSyncAlt } from 'react-icons/fa';
 
 
 export default function ListProdutos() {
 
+    const [buscarPorNome, setBuscarPorNome] = useState("");
+    
     //inject service
     const service = new ProdutoService();
 
@@ -22,6 +26,11 @@ export default function ListProdutos() {
         getAll()
     }, [])
 
+    const filteredProdutos = produtos.filter((produto) =>
+        produto.nome.toLowerCase().includes(buscarPorNome.toLowerCase())
+    );
+
+    getAll()
     return (
 
         <>
@@ -29,40 +38,91 @@ export default function ListProdutos() {
             <div className="container mx-auto flex flex-col items-center">
                 <ModalProduto />
 
-                
+
             </div>
 
-                
-
-
-
-            <div className="flex justify-center">
-            <div className=''>
-                {
-                    produtos.map((item) =>
-                        <ul className="max-w-md divide-y divide-gray-200 dark:divide-gray-700 ">
-                            <li className="pb-3 sm:pb-1 sm:pt-1 sm:pe-1 border-2">
-                                <div className="flex items-center space-x-4 rtl:space-x-reverse">
-                                    <div className="flex-shrink-0">
-
-                                    </div>
-                                    <div className="flex-1 min-w-0">
-                                    <div className="font-bold text-xl ">{item.nome}</div>
-                                    </div>
-                                    <div className="flex justify-around items-center sm:ps-12">
-                                        <button className="bg-indigo-300 hover:bg-indigo-100 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
-                                            <img width="20" height="30" src="https://img.icons8.com/ios-filled/50/restart--v1.png" alt="restart--v1" />
-                                        </button>
-                                        <button className="bg-red-400 hover:bg-red-200 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
-                                            <img width="20" height="30" src="https://img.icons8.com/ios/50/empty-trash.png" alt="empty-trash" />
-                                        </button>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    )}
+            <div className="flex justify-center m-5">
+                <h1 className="pe-2">Buscar por nome:</h1>
+                <input
+                className="border-2 border-sky-500"
+                    type="text"
+                    placeholder="Buscar por nome..."
+                    value={buscarPorNome}
+                    onChange={(e) => setBuscarPorNome(e.target.value)}
+                />
             </div>
+
+
+            <div className="flex justify-between border-2 border-sky-500 grid grid-cols-7 gap-1 ms-5 me-5">
+                <div>
+                    <h1>Nome</h1>
+                </div>
+                <div>
+                    <h1>Marca</h1>
+                </div>
+                <div>
+                    <h1>Modelo</h1>
+                </div>
+                <div>
+                    <h1>Quantidade</h1>
+                </div>
+                <div>
+                    <h1>Valor Custo</h1>
+                </div>
+                <div>
+                    <h1>Valor Venda</h1>
+                </div>
+                <div>
+                    <h1></h1>
+                </div>
             </div>
+
+            {
+                filteredProdutos.map((item) =>
+                    <div className="flex justify-between border-2 border-sky-500 grid grid-cols-7 gap-1 ms-5 me-5">
+                        <div>
+                            <div className="flex-1 min-w-0 ">
+                                <div className="font-bold text-xl ">{item.nome}</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div className="flex-1 min-w-0 ">
+                                <div className="font-bold text-xl ">{item.marca}</div>
+                            </div>                 </div>
+                        <div>
+                            <div className="flex-1 min-w-0 ">
+                                <div className="font-bold text-xl ">{item.modelo}</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div className="flex-1 min-w-0 ">
+                                <div className="font-bold text-xl ">{item.quantidade}</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div className="flex-1 min-w-0">
+                                <div className="font-bold text-xl ">{item.valorCusto}</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div className="flex-1 min-w-0">
+                                <div className="font-bold text-xl ">{item.valorVenda}</div>
+                            </div>
+                        </div>
+                        <div className="">
+                            <div className="flex justify-center">
+                                <button className="font-bold text-xl bg-indigo-300 hover:bg-indigo-100 py-1 px-4 rounded inline-flex items-center">
+                                    <FaSyncAlt />
+                                </button>
+                                <button className="bg-red-400 hover:bg-red-200 text-gray-800 font-bold py-1 px-4 rounded inline-flex items-center">
+                                    <FaTrash />
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                )}
         </>
 
 
