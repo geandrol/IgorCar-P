@@ -5,26 +5,37 @@ import CategoriaService from "../../service/CategoriaService";
 import Categoria from "../../models/Categoria";
 
 function FormProduto() {
-    const service = new ProdutoService();
+    const prodService = new ProdutoService();
     const [produto, setProduto] = useState<Produto>({} as Produto);
     const [categorias, setCategorias] = useState<Categoria[]>([])
-
-    const serviceC = new CategoriaService();
+    const catService = new CategoriaService();
     const [categoria, setCategoria] = useState<Categoria>({} as Categoria);
-
+    const [categoriaId, setCategoriaId] = useState(0);
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
+        
+       let cat = {
+            id: categoriaId
+        }
+
+        console.log(cat)
+       
         setProduto({
             ...produto,
             [name]: value,
-            categoria: categoria
+            categoria : cat as Categoria
         });
+
+    }
+
+    function getCategoriaId(id: number) {
+        console.log(id)
+        setCategoriaId(id)
     }
 
     useEffect(() => {
         async function getAllCategorias() {
-            const response = await serviceC.getAlll();
-            console.log(response);
+            const response = await catService.getAll();
             setCategorias(response);
         }
 
@@ -34,12 +45,14 @@ function FormProduto() {
     const handleNovoProduto = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
+        console.log(JSON.stringify(produto))
+
         try {
             if (produto.id) {
-                await service.update(produto);
+                await prodService.update(produto);
                 alert('Produto atualizado com sucesso');
             } else {
-                await service.save(produto);
+                await prodService.save(produto);
                 alert('Produto cadastrado com sucesso');
             }
         } catch (error: any) {
@@ -50,8 +63,7 @@ function FormProduto() {
 
     async function buscarCategoriaPorId(id: string) {
         try {
-            const categoriaEncontrada = await serviceC.getById(Number(id));
-            console.log('Categoria encontrada:', categoriaEncontrada);
+            const categoriaEncontrada = await catService.getById(Number(id));
             setCategoria(categoriaEncontrada);
         } catch (error) {
             console.error('Erro ao buscar categoria por ID:', error);
@@ -128,7 +140,7 @@ function FormProduto() {
                     <input
                         type="text"
                         placeholder="ValvendaorCusto"
-                        name="venda"
+                        name="valorVendal"
                         value={produto.valorVendal}
                         onChange={handleChange}
                         required
@@ -142,8 +154,12 @@ function FormProduto() {
                         name="categoria"
                         id="categoria"
                         className='border p-2 border-slate-800 rounded'
-                        onChange={(e) => buscarCategoriaPorId(e.currentTarget.value)}
-                        value={categoria.id || ''}
+                        onChange={(e) => {
+                            buscarCategoriaPorId(e.currentTarget.value)
+                            getCategoriaId(Number(e.currentTarget.value)) 
+                    
+                        }}
+                        value={categoria.id}
                     >
                         <option value="" disabled>Selecione uma Categoria</option>
                         {categorias.map((categoria) => (

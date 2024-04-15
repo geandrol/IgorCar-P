@@ -3,10 +3,11 @@ import Categoria from "../models/Categoria";
 
 const api = axios.create({
     baseURL: "https://igorcar.onrender.com"
+    //baseURL: "http://localhost:8080"
 })
 export default class CategoriaService {
 
-    async getAlll() {
+    async getAll() {
         const response = await api.get('categoria')
         return response.data
     }

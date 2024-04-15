@@ -17,8 +17,6 @@ export default function ListProdutos() {
 
     async function getAll() {
         const response = await service.getAll()
-        console.log(response)
-
         setProdutos(response)
     }
 
@@ -38,8 +36,6 @@ export default function ListProdutos() {
 
             <div className="container mx-auto flex flex-col items-center">
                 <ModalProduto />
-
-
             </div>
 
             <div className="flex justify-center m-5">
