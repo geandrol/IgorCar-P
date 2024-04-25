@@ -3,7 +3,8 @@ import Servico from "../models/Servico";
 import ServicoDto from "../models/ServicoDto";
 
 const api = axios.create({
-    baseURL: "https://igorcar.onrender.com"
+    //baseURL: "https://igorcar.onrender.com"
+    baseURL: "http://localhost:8080"
 })
 export default class ServicoService {
 

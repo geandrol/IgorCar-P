@@ -2,7 +2,8 @@ import axios from "axios";
 import Carro from "../models/Carro";
 
 const api = axios.create({
-    baseURL: "https://igorcar.onrender.com"
+    //baseURL: "https://igorcar.onrender.com"
+    baseURL: "http://localhost:8080"
 })
 export default class CarroService {
 
@@ -22,7 +23,7 @@ export default class CarroService {
     }
 
     async update(carro: Carro) {
-        const response = await api.put(`carro/`, carro)
+        const response = await api.post('carro', carro)
         return response
     }
 

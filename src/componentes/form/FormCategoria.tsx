@@ -13,7 +13,7 @@ function FormCategoria() {
     };
 
     async function getAll() {
-        const response = await service.getAlll()
+        const response = await service.getAll()
         console.log(response)
 
         setCategoria(response)

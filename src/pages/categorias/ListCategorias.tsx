@@ -14,7 +14,7 @@ export default function ListCategorias() {
     const [categorias, setCategorias] = useState<Categoria[]>([]);
 
     async function getAll() {
-        const response = await service.getAlll()
+        const response = await service.getAll()
         console.log(response)
 
         setCategorias(response)
@@ -77,8 +77,5 @@ export default function ListCategorias() {
                 </div>
             </div>
         </>
-
-
-
     )
 }

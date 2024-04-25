@@ -2,6 +2,9 @@ import { useState, useEffect } from "react"
 import Cliente from "../../models/Cliente"
 import ClienteService from "../../service/ClienteService"
 import ModalCliente from "../../componentes/modal/ModelCliente";
+import ModalListServicos from "../../componentes/modal/ModalListServicos";
+import ModalListCarros from "../../componentes/modal/ModalListCarros";
+import Carro from "../../models/Carro";
 
 
 export default function Clientes(){
@@ -15,7 +18,7 @@ async function getAll(){
 }
 
 useEffect(() => {
-    getAll()
+    getAll()    
 }, [])
 
     return(
@@ -26,7 +29,7 @@ useEffect(() => {
             <div className="mx-auto flex flex-row space-x-10 justify-center px-4 py-8">
                 {
                     cliente.map((item) => 
-                    <div className="max-w-sm min-w-[250px] rounded overflow-hidden shadow-lg h-52">
+                    <div key={item.id} className="max-w-sm min-w-[250px] rounded overflow-hidden shadow-lg h-52">
                         <div className="px-6 py-4">
                             <img width="50" height="50" src="https://img.icons8.com/ios-filled/50/user-male-circle.png" alt="user-male-circle"/>
                         </div>
@@ -37,12 +40,8 @@ useEffect(() => {
                             <div className="text-sm mb-5">{item.contato}</div> 
                         </div>
                         <div className="flex justify-around items-center">
-                            <button className="bg-green-400 hover:bg-green-100 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
-                                <img width="30" height="30" src="https://img.icons8.com/ios/50/document--v1.png" alt="document--v1"/>
-                            </button>
-                            <button className="bg-red-400 hover:bg-red-200 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
-                            <img width="30" height="30" src="https://img.icons8.com/ios/50/suv-2.png" alt="suv-2"/>
-                            </button>
+                             <ModalListServicos />
+                             <ModalListCarros carros={item.carros} usuario={item.id} />
                             <button className="bg-indigo-300 hover:bg-indigo-100 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
                                 <img width="30" height="30" src="https://img.icons8.com/ios-filled/50/restart--v1.png" alt="restart--v1"/>
                             </button>

@@ -2,8 +2,8 @@ import axios from "axios";
 import Categoria from "../models/Categoria";
 
 const api = axios.create({
-    baseURL: "https://igorcar.onrender.com"
-    //baseURL: "http://localhost:8080"
+    //baseURL: "https://igorcar.onrender.com"
+    baseURL: "http://localhost:8080"
 })
 export default class CategoriaService {
 
