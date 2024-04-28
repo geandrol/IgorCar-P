@@ -3,10 +3,17 @@ import { useEffect, useState } from "react"
 import CategoriaService from "../../service/CategoriaService";
 import Categoria from "../../models/Categoria";
 import ModalCategoria from "../../componentes/modal/ModalCategoria";
-import { FaSyncAlt, FaTrash } from "react-icons/fa";
+import ModalDeleteC from "../../componentes/modal/modelDelete/ModelDeleteC";
+import ModalEditarC from "../../componentes/modal/modelEdite/ModalEditarC";
+import { useNavigate } from "react-router-dom";
 
 
 export default function ListCategorias() {
+    let navigate = useNavigate()
+    function voltar() {
+        navigate('/estoque')
+    }
+
     const [buscarPorCategoria, setBuscarPorCategoria] = useState("");
     //inject service
     const service = new CategoriaService();
@@ -31,6 +38,11 @@ export default function ListCategorias() {
     return (
 
         <>
+        <div>
+            <button className="bg-red-500 hover:bg-red-700 text-white flex flex-row items-center justify-center py-4 px-4 rounded font-bold w-[100%] " onClick={voltar}>
+            <span>Voltar</span>
+                </button>                
+            </div>
 
             <div className="container mx-auto flex flex-col items-center">
                 <ModalCategoria />
@@ -63,11 +75,11 @@ export default function ListCategorias() {
                                             <div className="font-bold text-xl ">{item.descricao}</div>
                                         </div>
                                         <div className="flex justify-around items-center sm:ps-12">
-                                            <button className="font-bold text-xl bg-indigo-300 hover:bg-indigo-100 py-1 px-4 rounded inline-flex items-center">
-                                                <FaSyncAlt />
+                                            <button >
+                                                <ModalEditarC  categoriaId={item.id}/>
                                             </button>
-                                            <button className="bg-red-400 hover:bg-red-200 text-gray-800 font-bold py-1 px-4 rounded inline-flex items-center">
-                                                <FaTrash />
+                                            <button >
+                                            <ModalDeleteC  categoriaId={item.id}/>
                                             </button>
                                         </div>
                                     </div>

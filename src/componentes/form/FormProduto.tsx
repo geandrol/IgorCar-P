@@ -1,10 +1,10 @@
-import  { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import ProdutoService from "../../service/ProdutoService";
 import Produto from "../../models/Produto";
 import CategoriaService from "../../service/CategoriaService";
 import Categoria from "../../models/Categoria";
 
-function FormProduto() {
+function FormProduto({ productId }) {
     const service = new ProdutoService();
     const [produto, setProduto] = useState<Produto>({} as Produto);
     const [categorias, setCategorias] = useState<Categoria[]>([])
@@ -22,6 +22,22 @@ function FormProduto() {
     }
 
     useEffect(() => {
+        async function fetchData() {
+            // Se productId for fornecido, carregue os detalhes do produto correspondente
+            if (productId) {
+                try {
+                    const produto = await service.getById(productId);
+                    setProduto(produto);
+                    setCategoria(produto.categoria);
+                } catch (error) {
+                    console.error('Erro ao carregar detalhes do produto:', error);
+                }
+            }
+        }
+        fetchData();
+    }, [productId]);
+
+    useEffect(() => {
         async function getAllCategorias() {
             const response = await serviceC.getAlll();
             console.log(response);
@@ -35,18 +51,20 @@ function FormProduto() {
         e.preventDefault();
 
         try {
-            if (produto.id) {
+            if (productId) {
                 await service.update(produto);
                 alert('Produto atualizado com sucesso');
             } else {
                 await service.save(produto);
                 alert('Produto cadastrado com sucesso');
             }
+            window.location.reload();
         } catch (error: any) {
             console.error('Erro:', error.message);
             alert('Erro ao processar o produto');
         }
     };
+
 
     async function buscarCategoriaPorId(id: string) {
         try {
@@ -57,6 +75,8 @@ function FormProduto() {
             console.error('Erro ao buscar categoria por ID:', error);
         }
     }
+
+    const carregandoCategoria = categoria.descricao === '';
 
     return (
         <div className="container flex flex-col mx-auto items-center">
@@ -152,13 +172,9 @@ function FormProduto() {
                     </select>
                 </div>
 
-                <button
-                    type='submit'
-                    className='rounded disabled:bg-slate-200 bg-indigo-400 
-                        hover:bg-indigo-800 text-white font-bold w-1/2 mx-auto block py-2'
-                >
-                    Cadastrar
-                </button>
+                <button disabled={carregandoCategoria} type='submit' className='rounded disabled:bg-slate-200 bg-indigo-400 hover:bg-indigo-800 text-white font-bold w-1/2 mx-auto block py-2'>
+          { carregandoCategoria ? <span>Carregando</span>: productId  !== undefined ? 'Editar' : 'Cadastrar'}
+        </button>
             </form>
         </div>
     );

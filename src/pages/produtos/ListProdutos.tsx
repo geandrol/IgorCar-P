@@ -1,56 +1,100 @@
 import { useEffect, useState } from "react"
 import Produto from "../../models/Produto";
 import ProdutoService from "../../service/ProdutoService";
-import ModalProduto from "../../componentes/modal/ModalProduto";
+import CategoriaService from "../../service/CategoriaService";
 import './ListProdutos.css'
-import { FaTrash, FaSyncAlt } from 'react-icons/fa';
+import ModalProduto from "../../componentes/modal/ModalProduto";
+import ModalDeleteP from "../../componentes/modal/modelDelete/ModelDeleteP";
+import ModalProdutoE from "../../componentes/modal/modelEdite/ModalEditarP";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 
 export default function ListProdutos() {
-
+    let navigate = useNavigate()
     const [buscarPorNome, setBuscarPorNome] = useState("");
-    
+    const [buscarPorCategoria, setBuscarPorCategoria] = useState("");
+
+    function voltar() {
+        navigate('/estoque')
+    }
+
     //inject service
     const service = new ProdutoService();
+    const serviceC = new CategoriaService();
 
     const [produtos, setProdutos] = useState<Produto[]>([]);
 
-    async function getAll() {
-        const response = await service.getAll()
-        console.log(response)
+    const [categorias, setCategorias] = useState([]);
 
-        setProdutos(response)
+    async function getAll() {
+        const response = await service.getAll();
+        console.log(response);
+        setProdutos(response);
     }
 
+    async function getAlll() {
+        const response = await serviceC.getAlll();
+        console.log(response);
+        setCategorias(response);
+    }
+
+    const handleCategoriaChange = (e) => {
+        setBuscarPorCategoria(e.target.value);
+    };
 
     useEffect(() => {
-        getAll()
-    }, [])
+        getAll();
+        getAlll();
+    }, []);
 
     const filteredProdutos = produtos.filter((produto) =>
-        produto.nome.toLowerCase().includes(buscarPorNome.toLowerCase())
+        produto.nome.toLowerCase().includes(buscarPorNome.toLowerCase()) &&
+        produto.categoria?.descricao.includes(buscarPorCategoria)
     );
 
-    getAll()
     return (
 
         <>
-
+            <div>
+            <button className="bg-red-500 hover:bg-red-700 text-white flex flex-row items-center justify-center py-4 px-4 rounded font-bold w-[100%] " onClick={voltar}>
+            <span>Voltar</span>
+                </button>                
+            </div>
             <div className="container mx-auto flex flex-col items-center">
                 <ModalProduto />
 
 
             </div>
 
-            <div className="flex justify-center m-5">
-                <h1 className="pe-2">Buscar por nome:</h1>
-                <input
-                className="border-2 border-sky-500"
-                    type="text"
-                    placeholder="Buscar por nome..."
-                    value={buscarPorNome}
-                    onChange={(e) => setBuscarPorNome(e.target.value)}
-                />
+            <div className="flex">
+
+                <div className="flex justify-center m-5">
+                    <h1 className="pe-2">Buscar por nome:</h1>
+                    <input
+                        className="border-2 border-sky-500"
+                        type="text"
+                        placeholder="Buscar por nome..."
+                        value={buscarPorNome}
+                        onChange={(e) => setBuscarPorNome(e.target.value)}
+                    />
+                </div>
+
+                <div className="flex justify-center m-5">
+                    <h1 className="pe-2">Buscar por categoria:</h1>
+                    <select
+                        name="categoria"
+                        value={buscarPorCategoria}
+                        onChange={handleCategoriaChange}>
+                        <option value="">Todas as categorias</option>
+                        {categorias.map((categoria) => (
+                            <option key={categoria.id} value={categoria.descricao}>
+                                {categoria.descricao}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+
+
             </div>
 
 
@@ -120,11 +164,11 @@ export default function ListProdutos() {
                         </div>
                         <div className="">
                             <div className="flex justify-center">
-                                <button className="font-bold text-xl bg-indigo-300 hover:bg-indigo-100 py-1 px-4 rounded inline-flex items-center">
-                                    <FaSyncAlt />
+                                <button >
+                                    <ModalProdutoE productId={item.id}/>
                                 </button>
-                                <button className="bg-red-400 hover:bg-red-200 text-gray-800 font-bold py-1 px-4 rounded inline-flex items-center">
-                                    <FaTrash />
+                                <button >
+                                    <ModalDeleteP productId={item.id} />
                                 </button>
                             </div>
 

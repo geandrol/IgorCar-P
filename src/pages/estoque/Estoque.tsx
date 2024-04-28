@@ -1,9 +1,18 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Estoque() {
+    let navigate = useNavigate()
+    function voltar() {
+        navigate('/home')
+    }
     return (
         <>
-          
+            <div>
+                <button className="bg-red-500 hover:bg-red-700 text-white flex flex-row items-center justify-center py-4 px-4 rounded font-bold w-[100%] " onClick={voltar}>
+                    <span>Voltar</span>
+                </button>
+            </div>
+
             <div className="grid grid-cols-2 gap-1">
                 <div className="flex justify-center ms-4 me-4 mt-10">
                     <div className=" bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">

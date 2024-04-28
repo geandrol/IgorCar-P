@@ -4,8 +4,8 @@ import Produto from "../models/Produto";
 const api = axios.create({
     baseURL: "https://igorcar.onrender.com"
 })
-export default class ProdutoService {
 
+export default class ProdutoService {
     async getAll() {
         const response = await api.get('produto')
         return response.data
@@ -22,7 +22,7 @@ export default class ProdutoService {
     }
 
     async update(produto: Produto) {
-        const response = await api.put(`produto/`, produto)
+        const response = await api.put('produto', produto)
         return response
     }
 
