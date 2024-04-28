@@ -18,12 +18,12 @@ export default class ClienteService {
     }
 
     async save(cliente: Cliente) {
-        const response = await api.post('produto', cliente)
+        const response = await api.post('cliente', cliente)
         return response
     }
 
     async update(cliente: Cliente) {
-        const response = await api.put(`cliente/`, cliente)
+        const response = await api.put('cliente', cliente)
         return response
     }
 

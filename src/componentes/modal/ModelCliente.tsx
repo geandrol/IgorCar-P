@@ -1,10 +1,10 @@
 import Popup from 'reactjs-popup';
 
 import 'reactjs-popup/dist/index.css';
-import Cliente from '../form/Cliente';
+import Cliente from '../form/FormCliente';
 
 
-function ModalCliente() {
+function ModalCliente({reflash, data}: any) {
     return (
         <>
             <Popup
@@ -16,7 +16,7 @@ function ModalCliente() {
                 }
                 modal
             >
-                <Cliente />
+                <Cliente reflash={reflash} data={data} />
             </Popup>
         </>
     );

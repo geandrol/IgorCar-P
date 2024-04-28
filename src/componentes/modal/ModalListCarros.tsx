@@ -3,7 +3,7 @@ import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import Carro from '../../models/Carro';
 import FormCarro from '../form/FormCarro';
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 
 function ModalListCarros({carros, usuario}: any) {
 
@@ -38,6 +38,7 @@ function ModalListCarros({carros, usuario}: any) {
                     </button>
                 }
                 modal
+                onClose={() => console.log('close')}
             >
                 <div className="p-5">
                     <ul role="list" className="divide-y divide-gray-100">
@@ -64,7 +65,8 @@ function ModalListCarros({carros, usuario}: any) {
                         data={carroSelected} 
                         usuario={usuario} 
                         add={addCarro}
-                        edit={editCarro} />
+                        edit={editCarro} 
+                    />
                 </div>
             </Popup>
         </>

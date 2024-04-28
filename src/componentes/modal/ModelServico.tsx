@@ -1,10 +1,10 @@
 import Popup from 'reactjs-popup';
 
 import 'reactjs-popup/dist/index.css';
-import Servico from '../form/Servico';
+import Servico from '../form/FormServico';
 
 
-function ModalServico() {
+function ModalServico({ usuario }: any) {
     return (
         <>
             <Popup
@@ -16,7 +16,7 @@ function ModalServico() {
                 }
                 modal
             >
-                <Servico />
+                <Servico usuario={usuario} />
             </Popup>
         </>
     );

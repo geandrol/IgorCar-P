@@ -3,8 +3,6 @@ import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import FormCarro from '../form/FormCarro';
 
-
-
 function ModalCarro() {
 
     return (
