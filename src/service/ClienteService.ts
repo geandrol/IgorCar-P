@@ -2,7 +2,8 @@ import axios from "axios";
 import Cliente from "../models/Cliente";
 
 const api = axios.create({
-    baseURL: "https://igorcar.onrender.com"
+    //baseURL: "https://igorcar.onrender.com"
+    baseURL: "http://localhost:8080"
 })
 export default class ClienteService {
 
@@ -17,12 +18,12 @@ export default class ClienteService {
     }
 
     async save(cliente: Cliente) {
-        const response = await api.post('produto', cliente)
+        const response = await api.post('cliente', cliente)
         return response
     }
 
     async update(cliente: Cliente) {
-        const response = await api.put(`cliente/`, cliente)
+        const response = await api.put('cliente', cliente)
         return response
     }
 

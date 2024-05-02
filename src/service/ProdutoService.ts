@@ -2,7 +2,8 @@ import axios from "axios";
 import Produto from "../models/Produto";
 
 const api = axios.create({
-    baseURL: "https://igorcar.onrender.com"
+    //baseURL: "https://igorcar.onrender.com"
+    baseURL: "http://localhost:8080"
 })
 
 export default class ProdutoService {

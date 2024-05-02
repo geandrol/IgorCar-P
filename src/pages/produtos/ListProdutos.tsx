@@ -27,6 +27,7 @@ export default function ListProdutos() {
     const [categorias, setCategorias] = useState([]);
 
     async function getAll() {
+
         const response = await service.getAll();
         console.log(response);
         setProdutos(response);
@@ -36,6 +37,7 @@ export default function ListProdutos() {
         const response = await serviceC.getAlll();
         console.log(response);
         setCategorias(response);
+
     }
 
     const handleCategoriaChange = (e) => {
@@ -62,8 +64,6 @@ export default function ListProdutos() {
             </div>
             <div className="container mx-auto flex flex-col items-center">
                 <ModalProduto />
-
-
             </div>
 
             <div className="flex">
