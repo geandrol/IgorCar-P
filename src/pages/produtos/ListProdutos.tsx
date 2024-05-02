@@ -6,7 +6,7 @@ import './ListProdutos.css'
 import ModalProduto from "../../componentes/modal/ModalProduto";
 import ModalDeleteP from "../../componentes/modal/modelDelete/ModelDeleteP";
 import ModalProdutoE from "../../componentes/modal/modelEdite/ModalEditarP";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 export default function ListProdutos() {

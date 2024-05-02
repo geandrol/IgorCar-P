@@ -10,7 +10,7 @@ import ListCategorias from './pages/categorias/ListCategorias'
 import ListProdutos from './pages/produtos/ListProdutos'
 import Rota from './pages/categorias/Rota'
 import RotaP from './pages/produtos/RotaP'
-import ModalDeleteP from './componentes/modal/modelDelete/ModelDeleteP'
+
 
 function App() {
 
@@ -25,7 +25,6 @@ function App() {
         <Route path="/estoque" element={<Estoque />} />
         <Route path="/rotas" element={<Rota />} />
         <Route path="/rotasP" element={<RotaP />} />
-        <Route path="/modalDeleteP/:id" element={<ModalDeleteP />} />
       </Routes>
   </BrowserRouter>
   )

@@ -6,8 +6,14 @@ import ModalListServicos from "../../componentes/modal/ModalListServicos";
 import ModalListCarros from "../../componentes/modal/ModalListCarros";
 import ModalClienteEdit from "../../componentes/modal/ModalClienteEdit";
 import PageNataServico from "../../componentes/print/PageNataServico";
+import { useNavigate } from "react-router-dom";
 
 export default function Clientes() {
+
+    let navigate = useNavigate()
+    function voltar() {
+        navigate('/home')
+    }
 
     const service = new ClienteService()
     const [cliente, setCliente] = useState<Cliente[]>([]);
@@ -23,14 +29,19 @@ export default function Clientes() {
         getAll()
     }, [cliente])
 
-   
+
     function update() {
-        
-     }
+
+    }
 
     return (
 
         <>
+            <div>
+                <button className="bg-red-500 hover:bg-red-700 text-white flex flex-row items-center justify-center py-4 px-4 rounded font-bold w-[100%] " onClick={voltar}>
+                    <span>Voltar</span>
+                </button>
+            </div>
             <div className="container mx-auto flex flex-col items-center">
                 <ModalCliente reflash={update} data={{}} />
                 <div className="mx-auto flex flex-row space-x-10 justify-center px-4 py-8">
