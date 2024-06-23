@@ -8,7 +8,7 @@ function Estoque() {
     return (
         <>
             <div>
-                <button className="bg-red-500 hover:bg-red-700 text-white flex flex-row items-center justify-center py-4 px-4 rounded font-bold w-[100%] " onClick={voltar}>
+                <button className="bg-red-900 hover:bg-red-700 text-white flex flex-row items-center justify-center py-4 px-4 rounded font-bold w-[100%] " onClick={voltar}>
                     <span>Voltar</span>
                 </button>
             </div>

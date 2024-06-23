@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
-
+import logo from "../../assets/img/Default_A_surreal_and_vibrant_cinematic_photo_of_the_logo_of_a_1-removebg-preview__1_-removebg.png" 
 function Home() {
     return (
         <>
             <h1 className="flex justify-center text-3xl mt-5">
-                Igor Car
+                <img src={logo} alt="" width="230px"/>
             </h1>
 
-            <div className="grid grid-cols-2 gap-1">
+            <div className="grid grid-cols-2 gap-1 mb-5">
                 <div className="flex justify-center ms-4 me-4 mt-10">
                     <div className=" bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
 
