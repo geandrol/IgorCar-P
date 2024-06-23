@@ -95,7 +95,7 @@ function FormProduto({ productId }) {
 
     return (
         <div className="container flex flex-col mx-auto items-center">
-            <h1 className="text-4xl text-center my-8">Cadastrar Produto</h1>
+            <h1 className="text-4xl text-black text-center my-8">Cadastrar Produto</h1>
 
             <form onSubmit={handleNovoProduto} className="flex flex-col w-1/2 gap-4">
                 <div className="flex flex-col gap-2">

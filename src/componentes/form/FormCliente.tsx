@@ -42,7 +42,7 @@ function FormCliente({ reflash, data}: any) {
     return(
         <>
             <div className="container flex flex-col mx-auto items-center">
-                <h1 className="text-4xl text-center my-8">Cliente</h1>
+                <h1 className="text-4xl text-black text-center my-8">Cliente</h1>
                 <form ref={formElement} onSubmit={handleSubmit} className="flex flex-col gap-4">
                     <div className="flex flex-row gap-2">
                         <div className="flex flex-col gap-2">

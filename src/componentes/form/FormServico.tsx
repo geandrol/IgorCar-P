@@ -58,7 +58,7 @@ function FormServico({ carros, idCliente }: any) {
 
     return (
         <details title="Novo Serviço" className="flex flex-col justify-center items-center w-full">
-            <summary className="text-4xl text-center my-8">Novo Serviço</summary>
+            <summary className="text-4xl text-black text-center my-8">Novo Serviço</summary>
 
             <form onSubmit={handleNovoServico} className="flex flex-row justify-center flex-wrap w-full p-2 gap-4">
                 <div className="flex flex-col w-6/12 gap-2">
