@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import logo from "../../assets/img/Default_A_surreal_and_vibrant_cinematic_photo_of_the_logo_of_a_1-removebg-preview__1_-removebg.png" 
+import img1 from "../../assets/img/M4vtpQn.jpeg"
+import img2 from "../../assets/img/AvhreaA.jpeg"
 function Home() {
     return (
         <>
@@ -14,7 +16,7 @@ function Home() {
                         <h5 className="flex justify-center mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Serviços</h5>
 
                         <a href="#">
-                            <img className="rounded-t-lg" src="https://i.imgur.com/M4vtpQn.jpg" alt="" width='100%'/>
+                            <img className="rounded-t-lg" src={img1} alt="" width='100%'/>
                         </a>
                         <div className="p-5">
 
@@ -37,7 +39,7 @@ function Home() {
                         <h5 className="flex justify-center mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Estoque</h5>
 
                         <a href="#">
-                            <img className="rounded-t-lg" src="https://i.imgur.com/AvhreaA.jpg/image-1.jpg" alt="" width='100%' />
+                            <img className="rounded-t-lg" src={img2} alt="" width='100%' />
                         </a>
                         <div className="p-5">
 
