@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import { FaTrash } from 'react-icons/fa';
+import { FaExclamationTriangle } from 'react-icons/fa';
 import Categoria from '../../../models/Categoria';
 import CategoriaService from '../../../service/CategoriaService';
 
@@ -45,7 +46,7 @@ function ModalDeleteC({ categoriaId } : {categoriaId : number}) {
             >
                   <div style={{ maxHeight: '400px', overflowY: 'auto' }}>
                 <form action="">
-                <h1 > Tem ceteza que quer apagar a categoria: {categoria.id  ? categoria.descricao: 'Carregando...'}?</h1>
+                <h1 > <FaExclamationTriangle /> Tem ceteza que quer apagar a categoria: {categoria.id  ? categoria.descricao: 'Carregando...'}?</h1>
                     <button className='w-full text-slate-100 bg-indigo-400 hover:bg-indigo-600 flex items-center justify-center' onClick={deletarCategoria}>sim</button>
                 </form>
                 </div>

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import Cliente from "../../models/Cliente";
 import Servico from "../../models/Servico";
+import herbie from "../../assets/herbie.png"; 
+import igorLogo from "../../assets/IgorLogo.webp"// Importando a imagem
 
 export default function PageNataServico({cliente, servico}: any) {
 
@@ -16,8 +18,7 @@ export default function PageNataServico({cliente, servico}: any) {
         <div className="flex flex-col justify-center items-center w-full">
             <div className="flex flex-col justify-center items-center w-full border-b border-gray-200">
                 <div className="flex flex-row justify-between items-center gap-x-5 mt-2">
-                    <img width="100" height="100" src="https://img.icons8.com/color/48/herbie.png" alt="herbie" />
-                    <p className='text-5xl ml-16'>Igor Car</p>
+                    <img className="rounded-full" width="130" height="130" src={igorLogo} alt="herbie" /> {/* Usando a imagem importada */}
                 </div>
 
                 <div className="flex flex-row justify-center items-center gap-x-5 px-1 sm:px-0 w-full">

@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react"
 import CategoriaService from "../../service/CategoriaService";
 import Categoria from "../../models/Categoria";
@@ -6,7 +5,7 @@ import ModalCategoria from "../../componentes/modal/ModalCategoria";
 import ModalDeleteC from "../../componentes/modal/modelDelete/ModelDeleteC";
 import ModalEditarC from "../../componentes/modal/modelEdite/ModalEditarC";
 import { useNavigate } from "react-router-dom";
-
+import { FaArrowLeft } from 'react-icons/fa'; // Importando ícone do react-icons
 
 export default function ListCategorias() {
     let navigate = useNavigate()
@@ -41,6 +40,7 @@ export default function ListCategorias() {
         <>
         <div>
             <button className="bg-red-500 hover:bg-red-700 text-white flex flex-row items-center justify-center py-4 px-4 rounded font-bold w-[100%] " onClick={voltar}>
+            <FaArrowLeft className="mr-2" size={20} /> {/* Substituindo o ícone externo */}
             <span>Voltar</span>
                 </button>                
             </div>

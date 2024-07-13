@@ -9,7 +9,7 @@ function ModalEditarC({ categoriaId }: { categoriaId: number }) {
             <Popup
                trigger={
                 <button className="font-bold text-xl bg-indigo-300 hover:bg-indigo-100 py-[5px] px-4 ml-10 mr-6 rounded inline-flex items-center">                  
-                    <FaSyncAlt />
+                    <FaSyncAlt size={24} />
                 </button>
             }
                 modal

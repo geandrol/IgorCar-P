@@ -14,29 +14,27 @@ function FormCarro({data, usuario, add, edit}: any) {
     useEffect(() => {
         setIdCliente(usuario)
         setCarroNew(data)
-       
-
-    }, [data]);
+    }, [data, usuario]);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
                 
-        console.log(console.log(JSON.stringify(carroNew)))
+        console.log(JSON.stringify(carroNew));
        
-        try{
-            if (!carroNew) return
+        try {
+            if (!carroNew) return;
 
             if (carroNew.id) {
                 await service.update(carroNew);
                 alert('Carro atualizado com sucesso');
-                edit(carroNew)
+                edit(carroNew);
             } else {
                 await service.save(carroNew);
                 alert('Carro cadastrado com sucesso');
-                add(carroNew)
+                add(carroNew);
             }
-            setCarroNew({} as Carro)
-            resetForm()
+            setCarroNew({} as Carro);
+            resetForm();
             
         } catch (error: any) {
             console.error('Erro:', error.message);
@@ -45,10 +43,8 @@ function FormCarro({data, usuario, add, edit}: any) {
     };
 
     function resetForm() {
-        setCarroNew({} as Carro)
-        formElement.current?.reset()
-       
-        
+        setCarroNew({} as Carro);
+        formElement.current?.reset();
     }
     
     return (
@@ -64,7 +60,7 @@ function FormCarro({data, usuario, add, edit}: any) {
                                 placeholder="Modelo"
                                 name="modelo"
                                 value={carroNew?.modelo || ''}
-                                onChange={(e) => setCarroNew({ ...carroNew, modelo: e.target.value, modele: e.target.value, cliente: { id: idCliente } as Cliente })}
+                                onChange={(e) => setCarroNew({ ...carroNew, modelo: e.target.value, cliente: { id: idCliente } as Cliente })}
                                 required
                                 className="border-2 border-slate-700 rounded p-2"
                             />
@@ -98,11 +94,9 @@ function FormCarro({data, usuario, add, edit}: any) {
                         </button>
                     </div>
                 </form>
-                <input type="button" value="Limpar Formulário" onClick={resetForm} className="rounded bg-red-400 hover:bg-red-800 text-white font-bold w-[12.4rem] mx-auto block py-2 mt-2" />
+                <input type="button" value="Limpar Formulário" onClick={resetForm} className="rounded bg-red-400 hover:bg-red-800 text-white font-bold w-[12.4rem] mx-auto block py-2 mt-2" />
             </div>
         </>
-
-
     )
 }
 export default FormCarro;
