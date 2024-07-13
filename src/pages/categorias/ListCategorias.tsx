@@ -31,9 +31,10 @@ export default function ListCategorias() {
         getAll()
     }, [])
 
-    const filteredCategorias = categorias.filter((categoria) =>
-        categoria.descricao.toLowerCase().includes(buscarPorCategoria.toLowerCase())
-    );
+    const filteredCategorias = categorias.filter((categoria) => {
+        if (!buscarPorCategoria) return true;
+        return categoria.descricao.toLowerCase().includes(buscarPorCategoria.toLowerCase());
+    });
 
     return (
 
@@ -62,30 +63,28 @@ export default function ListCategorias() {
 
             <div className="flex justify-center">
                 <div className=''>
-                <h1>Descrição</h1>
+                <table className="min-w-full bg-white">
+                                <thead>
+                                    <tr>
+                                        <th className="py-2">Descrição</th>
+                                        <th className="py-2">Qtd Mínima</th>
+                                        <th className="py-2">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="border">
                     {
-                        filteredCategorias.map((item) =>
-                            <ul className="max-w-md divide-y divide-gray-200 dark:divide-gray-700 ">
-                                <li className="pb-3 sm:pb-1 sm:pt-1 sm:pe-1 border-2">
-                                    <div className="flex items-center space-x-4 rtl:space-x-reverse">
-                                        <div className="flex-shrink-0">
-                                          
-                                        </div>
-                                        <div className="flex-1 min-w-0">
-                                            <div className="font-bold text-xl ">{item.descricao}</div>
-                                        </div>
-                                        <div className="flex justify-around items-center sm:ps-12">
-                                            <button >
-                                                <ModalEditarC  categoriaId={item.id}/>
-                                            </button>
-                                            <button >
-                                            <ModalDeleteC  categoriaId={item.id}/>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
+                        filteredCategorias.map((item) => 
+                                    <tr className="border" key={item.id}>
+                                        <td className=" px-4 py-2">{item.descricao}</td>
+                                        <td className=" px-4 py-2">{item.qtdMin}</td>
+                                        <td className=" px-4 py-2 flex space-x-2">
+                                            <ModalEditarC categoriaId={item.id} />
+                                            <ModalDeleteC categoriaId={item.id} />
+                                        </td>
+                                    </tr>
                         )}
+                         </tbody>
+                    </table>
                 </div>
             </div>
         </>

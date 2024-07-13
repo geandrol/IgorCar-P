@@ -7,6 +7,7 @@ import ModalProduto from "../../componentes/modal/ModalProduto";
 import ModalDeleteP from "../../componentes/modal/modelDelete/ModelDeleteP";
 import ModalProdutoE from "../../componentes/modal/modelEdite/ModalEditarP";
 import { Link, Navigate, useNavigate } from "react-router-dom";
+import Categoria from "../../models/Categoria";
 
 
 export default function ListProdutos() {
@@ -20,33 +21,33 @@ export default function ListProdutos() {
 
     //inject service
     const service = new ProdutoService();
-    const serviceC = new CategoriaService();
+    const serviceCategoria = new CategoriaService();
 
     const [produtos, setProdutos] = useState<Produto[]>([]);
 
-    const [categorias, setCategorias] = useState([]);
+    const [categorias, setCategorias] = useState<Categoria[]>([]);
 
-    async function getAll() {
+    async function getAllProduto() {
 
         const response = await service.getAll();
         console.log(response);
         setProdutos(response);
     }
 
-    async function getAlll() {
-        const response = await serviceC.getAlll();
+    async function getAllCategorias() {
+        const response = await serviceCategoria.getAll();
         console.log(response);
         setCategorias(response);
 
     }
 
-    const handleCategoriaChange = (e) => {
+    const handleCategoriaChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setBuscarPorCategoria(e.target.value);
     };
 
     useEffect(() => {
-        getAll();
-        getAlll();
+        getAllProduto();
+        getAllCategorias();
     }, []);
 
     const filteredProdutos = produtos.filter((produto) =>
@@ -56,7 +57,7 @@ export default function ListProdutos() {
 
     return (
 
-        <>
+        <div className="flex flex-col justify-center">
             <div>
             <button className="bg-red-500 hover:bg-red-700 text-white flex flex-row items-center justify-center py-4 px-4 rounded font-bold w-[100%] " onClick={voltar}>
             <span>Voltar</span>
@@ -66,8 +67,7 @@ export default function ListProdutos() {
                 <ModalProduto />
             </div>
 
-            <div className="flex">
-
+            <div className="flex justify-center w-[100%] mx-auto">
                 <div className="flex justify-center m-5">
                     <h1 className="pe-2">Buscar por nome:</h1>
                     <input
@@ -92,91 +92,53 @@ export default function ListProdutos() {
                             </option>
                         ))}
                     </select>
-                </div>
-
-
+                 </div>
             </div>
 
 
-            <div className="flex justify-between border-2 border-sky-500 grid grid-cols-8 gap-1 ms-5 me-5">
-                <div>
-                    <h1>Nome</h1>
-                </div>
-                <div>
-                    <h1>Marca</h1>
-                </div>
-                <div>
-                    <h1>Modelo</h1>
-                </div>
-                <div>
-                    <h1>Quantidade</h1>
-                </div>
-                <div>
-                    <h1>Valor Custo</h1>
-                </div>
-                <div>
-                    <h1>Valor Venda</h1>
-                </div>
-                <div>
-                    <h1>Categoria</h1>
-                </div>
-                <div>
-                    <h1></h1>
-                </div>
-            </div>
+            <div className="mx-7">
+                <table className="min-w-full bg-white">
+                    <thead>
+                        <tr>
+                            <th className="py-2">Descrição</th>
+                            <th className="py-2">Marca</th>
+                            <th className="py-2">Modelo</th>
+                            <th className="py-2">Nome</th>
+                            <th className="py-2">Quantidade</th>
+                            <th className="py-2">Valor Custo</th>
+                            <th className="py-2">Valor Venda</th>
+                            <th className="py-2">Categoria</th>
+                            <th className="py-2">Qtd Min</th>
+                            <th className="py-2">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody className="border">
 
-            {
-                filteredProdutos.map((item) =>
-                    <div className="flex justify-between border-2 border-sky-500 grid grid-cols-8 gap-1 ms-5 me-5">
-                        <div>
-                            <div className="flex-1 min-w-0 ">
-                                <div className="font-bold text-xl ">{item.nome}</div>
-                            </div>
-                        </div>
-                        <div>
-                            <div className="flex-1 min-w-0 ">
-                                <div className="font-bold text-xl ">{item.marca}</div>
-                            </div>                 </div>
-                        <div>
-                            <div className="flex-1 min-w-0 ">
-                                <div className="font-bold text-xl ">{item.modelo}</div>
-                            </div>
-                        </div>
-                        <div>
-                            <div className="flex-1 min-w-0 ">
-                                <div className="font-bold text-xl ">{item.quantidade}</div>
-                            </div>
-                        </div>
-                        <div>
-                            <div className="flex-1 min-w-0">
-                                <div className="font-bold text-xl ">{item.valorCusto}</div>
-                            </div>
-                        </div>
-                        <div>
-                            <div className="flex-1 min-w-0">
-                                <div className="font-bold text-xl ">{item.valorVendal}</div>
-                            </div>
-                        </div>
-                        <div>
-                            <div className="flex-1 min-w-0">
-                                <div className="font-bold text-xl ">{item.categoria?.descricao}</div>
-                            </div>
-                        </div>
-                        <div className="">
-                            <div className="flex justify-center">
-                                <button >
-                                    <ModalProdutoE productId={item.id}/>
-                                </button>
-                                <button >
+                        {
+                        filteredProdutos.map((item) =>
+                            <tr className="border" key={item.id}>
+                                <td className="text-center">{item.descricao}</td>
+                                <td className="text-center">{item.marca}</td>
+                                <td className="text-center">{item.modelo}</td>
+                                <td className="text-center">{item.nome}</td>
+                                <td className={`text-center ${item.categoria && item.quantidade <= item.categoria.qtdMin ? 'bg-red-500' : ''}`}>
+                                    {item.quantidade}
+                                </td>
+                                <td className="text-center">{item.valorCusto.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+                                <td className="text-center">{item.valorVendal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+                                <td className="text-center">{item.categoria?.descricao}</td>
+                                <td className="text-center">{item.categoria?.qtdMin}</td>
+                                <td className=" px-4 py-2 flex justify-around space-x-2 ">
+                                    <ModalProdutoE productId={item.id} />
                                     <ModalDeleteP productId={item.id} />
-                                </button>
-                            </div>
-
-                        </div>
-
-                    </div>
-                )}
-        </>
+                                </td>
+                            </tr>
+                            
+                        )}
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
 
 

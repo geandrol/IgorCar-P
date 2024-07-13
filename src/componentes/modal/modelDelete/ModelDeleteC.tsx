@@ -5,7 +5,7 @@ import { FaTrash } from 'react-icons/fa';
 import Categoria from '../../../models/Categoria';
 import CategoriaService from '../../../service/CategoriaService';
 
-function ModalDeleteC({ categoriaId }) {
+function ModalDeleteC({ categoriaId } : {categoriaId : number}) {
     const [categoria, setCategoria] = useState<Categoria>({} as Categoria);
 
     const service = new CategoriaService();
@@ -16,7 +16,7 @@ function ModalDeleteC({ categoriaId }) {
                 const categoria = await service.getById(categoriaId);
                 setCategoria(categoria);
             } catch (error) {
-                console.error('Erro ao buscar o categoria por ID:', error);
+                //console.error('Erro ao buscar o categoria por ID:', error);
             }
         }
         buscarPorId();
@@ -37,7 +37,7 @@ function ModalDeleteC({ categoriaId }) {
         <>
             <Popup
                trigger={
-                <button className="bg-red-400 hover:bg-red-200 text-gray-800 font-bold py-1 px-4 rounded inline-flex items-center">
+                <button className="bg-red-400 hover:bg-red-200 text-gray-800 font-bold py-[7px] px-4 rounded inline-flex items-center">
                 <FaTrash />
             </button>
             }

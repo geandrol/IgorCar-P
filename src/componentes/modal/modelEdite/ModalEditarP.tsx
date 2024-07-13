@@ -1,11 +1,10 @@
 import Popup from 'reactjs-popup';
 
 import 'reactjs-popup/dist/index.css';
-import Produto from '../../form/FormProduto';
 import { FaSyncAlt } from 'react-icons/fa';
 import FormProduto from '../../form/FormProduto';
 
-function ModalProdutoE({ productId }) {
+function ModalProdutoE({ productId }: {productId:number}) {
     return (
         <>
             <Popup

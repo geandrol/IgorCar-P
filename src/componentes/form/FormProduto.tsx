@@ -4,7 +4,7 @@ import Produto from "../../models/Produto";
 import CategoriaService from "../../service/CategoriaService";
 import Categoria from "../../models/Categoria";
 
-function FormProduto({ productId }) {
+function FormProduto({ productId } : {productId: number}) {
     const service = new ProdutoService();
 
 
@@ -43,6 +43,9 @@ function FormProduto({ productId }) {
                     const produto = await service.getById(productId);
                     setProduto(produto);
                     setCategoria(produto.categoria);
+                    setCategoriaId(produto.categoria.id); // Atualiza o ID da categoria
+
+                    console.log(produto.categoria)
                 } catch (error) {
                     console.error('Erro ao carregar detalhes do produto:', error);
                 }
@@ -72,7 +75,7 @@ function FormProduto({ productId }) {
 
                 alert('Produto atualizado com sucesso');
             } else {
-                await prodService.save(produto);
+                await service.save(produto);
                 alert('Produto cadastrado com sucesso');
             }
             window.location.reload();
@@ -99,6 +102,26 @@ function FormProduto({ productId }) {
             <h1 className="text-4xl text-center my-8">Cadastrar Produto</h1>
 
             <form onSubmit={handleNovoProduto} className="flex flex-col w-1/2 gap-4">
+
+            <div className="flex flex-col gap-2">
+                    <p>Categoria do Produto</p>
+                    <select
+                        name="categoria"
+                        id="categoria"
+                        className='border p-2 border-slate-800 rounded'
+                        onChange={(e) => {
+                            buscarCategoriaPorId(e.currentTarget.value)
+                            getCategoriaId(Number(e.currentTarget.value)) 
+                    
+                        }}
+                        value={categoriaId} // Atualiza o valor do select
+                    >
+                        <option value="0" disabled>Selecione uma Categoria</option>
+                        {categorias.map((categoria) => (
+                            <option key={categoria.id} value={categoria.id}>{categoria.descricao}</option>
+                        ))}
+                    </select>
+                </div>
                 <div className="flex flex-col gap-2">
                     <label htmlFor="descricao">Nome do produto</label>
                     <input
@@ -106,6 +129,18 @@ function FormProduto({ productId }) {
                         placeholder="Nome"
                         name="nome"
                         value={produto.nome}
+                        onChange={handleChange}
+                        required
+                        className="border-2 border-slate-700 rounded p-2"
+                    />
+                </div>
+                <div className="flex flex-col gap-2">
+                    <label htmlFor="nome">Descrição do produto</label>
+                    <input
+                        type="text"
+                        placeholder="Descrição"
+                        name="descricao"
+                        value={produto.descricao}
                         onChange={handleChange}
                         required
                         className="border-2 border-slate-700 rounded p-2"
@@ -172,25 +207,7 @@ function FormProduto({ productId }) {
                     />
                 </div>
 
-                <div className="flex flex-col gap-2">
-                    <p>Categoria do Produto</p>
-                    <select
-                        name="categoria"
-                        id="categoria"
-                        className='border p-2 border-slate-800 rounded'
-                        onChange={(e) => {
-                            buscarCategoriaPorId(e.currentTarget.value)
-                            getCategoriaId(Number(e.currentTarget.value)) 
-                    
-                        }}
-                        value={categoria.id}
-                    >
-                        <option value="" disabled>Selecione uma Categoria</option>
-                        {categorias.map((categoria) => (
-                            <option key={categoria.id} value={categoria.id}>{categoria.descricao}</option>
-                        ))}
-                    </select>
-                </div>
+                
 
                 <button disabled={carregandoCategoria} type='submit' className='rounded disabled:bg-slate-200 bg-indigo-400 hover:bg-indigo-800 text-white font-bold w-1/2 mx-auto block py-2'>
           { carregandoCategoria ? <span>Carregando</span>: productId  !== undefined ? 'Editar' : 'Cadastrar'}

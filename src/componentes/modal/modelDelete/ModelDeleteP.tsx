@@ -5,7 +5,7 @@ import { FaTrash } from 'react-icons/fa';
 import ProdutoService from '../../../service/ProdutoService';
 import Produto from '../../../models/Produto';
 
-function ModalDeleteP({ productId }) {
+function ModalDeleteP({ productId } : {productId: number}) {
     const [produto, setProduto] = useState<Produto>({} as Produto);
 
     const service = new ProdutoService();

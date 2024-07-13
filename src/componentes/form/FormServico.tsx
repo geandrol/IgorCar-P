@@ -5,30 +5,50 @@ import Produto from "../../models/Produto";
 import ProdutoService from "../../service/ProdutoService";
 import ServicoDto from "../../models/ServicoDto";
 import ProdutoServicoDto from "../../models/ProdutoServicoDto";
+import ServicoService from "../../service/ServicoService"; // Adicionei o serviço de Servico
 
 function FormServico({ carros, idCliente }: any) {
 
     const [servico, setServico] = useState<Servico>({} as Servico);
     const [carroList, setCarroList] = useState<Carro[]>([]);
-
-
     const [carro, setCarro] = useState<Carro>({} as Carro);
     const [produtos, setProdutos] = useState<Produto[]>([]);
     const [produto, setProduto] = useState<Produto>({} as Produto);
 
     const [produtoSelect, setProdutoSelect] = useState<Produto[]>([]);
+    const [produtosDto, setProdutosDto] = useState<ProdutoServicoDto[]>([]);
     const [servicoDto, setServicoDto] = useState<ServicoDto>({} as ServicoDto);
 
     const produtoService = new ProdutoService();
+    const servicoService = new ServicoService(); // Instanciei o serviço de Servico
 
     function getProdutoId(id: number) {
-        const p = produtos.find(p => p.id === id)
-
+        const p = produtos.find(p => p.id === id);
         setProdutoSelect([...produtoSelect, p as Produto]);
     }
 
     async function handleNovoServico(e: FormEvent) {
         e.preventDefault();
+
+        try {
+            if (!servicoDto) return;
+
+            const produtosDto = produtoSelect.map((p) => ({ idProduto: p.id }));
+            const novoServicoDto = { ...servicoDto, produtos: produtosDto };
+
+            console.log(novoServicoDto);
+
+            // Chame o serviço para criar o novo serviço
+            await servicoService.save(novoServicoDto);
+
+            // Limpe os estados após a criação
+            setServicoDto({} as ServicoDto);
+            setProdutoSelect([]);
+            setProdutosDto([]);
+
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     useEffect(() => {
@@ -39,21 +59,20 @@ function FormServico({ carros, idCliente }: any) {
 
         setCarroList(carros);
         getAllProdutos();
-    }, []);
-
+    }, [carros]);
 
     function handleAddProduto() {
-        if (!produto)
-            alert('Selecione um produto')
+        if (!produto) {
+            alert('Selecione um produto');
+            return;
+        }
 
-        const p = produtos.find(p => p.id === Number(produto))
-
+        const p = produtos.find(p => p.id === Number(produto));
         setProdutoSelect([...produtoSelect, p as Produto]);
-
     }
 
     function handleDeleteProduto(id: number) {
-        setProdutoSelect(produtoSelect.filter(p => p.id !== id))
+        setProdutoSelect(produtoSelect.filter(p => p.id !== id));
     }
 
     return (
@@ -69,9 +88,8 @@ function FormServico({ carros, idCliente }: any) {
                         id="carro"
                         className='border p-2 border-slate-800 rounded'
                         onChange={(e) => {
-                            setCarro({ ...carro, id: Number(e.currentTarget.value) })
-                            setServicoDto({ ...servicoDto, carroId: Number(e.currentTarget.value) })
-                            console.log(servicoDto)
+                            setCarro({ ...carro, id: Number(e.currentTarget.value) });
+                            setServicoDto({ ...servicoDto, carroId: Number(e.currentTarget.value) });
                         }}
                         value={carro.id}
                     >
@@ -88,12 +106,11 @@ function FormServico({ carros, idCliente }: any) {
                         id="produto"
                         className='border p-2 border-slate-800 rounded'
                         onChange={(e) => {
-                            (e.currentTarget.value as any)
-                            setProduto(e.currentTarget.value as any)
+                            setProduto(e.currentTarget.value as any);
                         }}
                         value={produto.id}
                     >
-                        <option value="">Selecione um porduto</option>
+                        <option value="">Selecione um produto</option>
                         {produtos.map((produto: Produto) => (
                             <option key={produto.id} value={produto.id}>{produto.nome} - {produto.modelo}</option>
                         ))}
@@ -101,6 +118,7 @@ function FormServico({ carros, idCliente }: any) {
                 </div>
                 <div className="flex flex-col justify-end items-end gap-2">
                     <button
+                        type="button" // Alterei para evitar o submit do form
                         onClick={handleAddProduto}
                         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded h-10">+</button>
                 </div>
@@ -110,14 +128,13 @@ function FormServico({ carros, idCliente }: any) {
                         type="date"
                         placeholder="Garantia"
                         name="fimGarantia"
-                        value={servico.fimGarantia}
+                        value={servicoDto.fimGarantia?.toISOString().split('T')[0] || ''}
                         onChange={(e) => {
                             setServicoDto({
                                 ...servicoDto,
                                 carroId: Number(carro.id),
                                 fimGarantia: new Date(e.currentTarget.value)
-
-                            })
+                            });
                         }}
                         required
                         className="border-2 border-slate-700 rounded p-2"
@@ -132,7 +149,7 @@ function FormServico({ carros, idCliente }: any) {
                         name="vlrTotalMaoDeObra"
                         value={servico.vlrTotalMaoDeObra}
                         onChange={(e) => {
-                            setServicoDto({ ...servicoDto, carroId: Number(carro.id), vlrTotalMaoDeObra: Number(e.currentTarget.value) })
+                            setServicoDto({ ...servicoDto, carroId: Number(carro.id), vlrTotalMaoDeObra: Number(e.currentTarget.value) });
                         }}
                         required
                         className="border-2 border-slate-700 rounded p-2"
@@ -140,15 +157,11 @@ function FormServico({ carros, idCliente }: any) {
                 </div>
 
                 <div className="flex flex-row justify-start flex-wrap items-center gap-x-5 sm:px-0">
-                    {
-                        produtoSelect.map((p: Produto) => (
-                            <button key={p.id}
-                                onClick={() => handleDeleteProduto(p.id)}
-                            >
-                                <span className="inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-xs font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10">{p.nome}</span>
-                            </button>
-                        ))
-                    }
+                    {produtoSelect.map((p: Produto, index) => (
+                        <button key={`${p.id}-${index}`} type="button" onClick={() => handleDeleteProduto(p.id)}>
+                            <span className="inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-xs font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10">{p.nome}</span>
+                        </button>
+                    ))}
                 </div>
 
                 <div className="flex flex-col gap-2 w-[99%]">
@@ -158,8 +171,7 @@ function FormServico({ carros, idCliente }: any) {
                         name="descricao"
                         value={servicoDto.descricao}
                         onChange={(e) => {
-                            setServicoDto({ ...servicoDto, carroId: Number(carro.id), clienteId: Number(idCliente), descricao: e.currentTarget.value })
-                            console.log(servicoDto)
+                            setServicoDto({ ...servicoDto, carroId: Number(carro.id), clienteId: Number(idCliente), descricao: e.currentTarget.value });
                         }}
                         required
                         className="border-2 border-slate-700 rounded p-2"
@@ -174,9 +186,6 @@ function FormServico({ carros, idCliente }: any) {
                     Cadastrar
                 </button>
             </form>
-
-
-
         </details>
     );
 }
