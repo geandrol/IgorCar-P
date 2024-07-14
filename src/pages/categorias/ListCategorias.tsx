@@ -38,16 +38,12 @@ export default function ListCategorias() {
     return (
 
         <>
-        <div>
-            <button className="bg-red-500 hover:bg-red-700 text-white flex flex-row items-center justify-center py-4 px-4 rounded font-bold w-[100%] " onClick={voltar}>
-            <FaArrowLeft className="mr-2" size={20} /> {/* Substituindo o ícone externo */}
-            <span>Voltar</span>
-                </button>                
-            </div>
-
-            <div className="container mx-auto flex flex-col items-center">
-                <ModalCategoria />
-
+            <div className="flex flex-row">
+                <button className="bg-red-500 hover:bg-red-700 text-white flex flex-row items-center justify-center py-4 px-4 rounded-bl-3xl font-bold w-3/12 " onClick={voltar}>
+                    <FaArrowLeft className="mr-2" size={20} /> {/* Substituindo o ícone externo */}
+                    <span>Voltar</span>
+                </button>  
+                <ModalCategoria />              
             </div>
 
             <div className="flex justify-center m-5">

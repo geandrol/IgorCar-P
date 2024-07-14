@@ -43,16 +43,15 @@ export default function Clientes() {
     return (
 
         <>
-            <div>
-                <button className="bg-red-500 hover:bg-red-700 text-white flex flex-row items-center justify-center py-4 px-4 rounded font-bold w-[100%] " onClick={voltar}>
+            <div className="flex flex-row">
+                <button className="bg-red-500 hover:bg-red-700 text-white flex flex-row items-center justify-center py-4 px-4 rounded-bl-3xl font-bold w-3/12 " onClick={voltar}>
                     <FaArrowLeft className="mr-2" size={20} /> {/* Substituindo o ícone externo */}
                     <span>Voltar</span>
-                </button>                
+                </button>  
+                <ModalCliente reflash={update} data={{}} />
             </div>
 
             <div className="container mx-auto flex flex-col items-center">
-                <ModalCliente reflash={update} data={{}} />
-
             <div className="flex justify-center m-5">
                 <h1 className="pe-2">Buscar por categoria: </h1>
                 <input

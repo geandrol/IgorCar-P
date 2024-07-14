@@ -4,7 +4,7 @@ import Produto from "../../models/Produto";
 import CategoriaService from "../../service/CategoriaService";
 import Categoria from "../../models/Categoria";
 
-function FormProduto({ productId } : {productId: number}) {
+function FormProduto({ productId } : {productId?: number}) {
     const service = new ProdutoService();
 
 

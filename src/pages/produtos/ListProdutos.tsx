@@ -58,15 +58,13 @@ export default function ListProdutos() {
     return (
 
         <div className="flex flex-col justify-center">
-            <div>
-            <button className="bg-red-500 hover:bg-red-700 text-white flex flex-row items-center justify-center py-4 px-4 rounded font-bold w-[100%] " onClick={voltar}>
-            <span>Voltar</span>
-                </button>                
+            <div className="flex flex-row">
+                <button className="bg-red-500 hover:bg-red-700 text-white flex flex-row items-center justify-center py-4 px-4 rounded-bl-3xl font-bold w-3/12 " onClick={voltar}>
+                    <span>Voltar</span>
+                </button> 
+                <ModalProduto />               
             </div>
-            <div className="container mx-auto flex flex-col items-center">
-                <ModalProduto />
-            </div>
-
+        
             <div className="flex justify-center w-[100%] mx-auto">
                 <div className="flex justify-center m-5">
                     <h1 className="pe-2">Buscar por nome:</h1>

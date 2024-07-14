@@ -2,7 +2,7 @@ import React, { ChangeEvent, useEffect, useState } from "react";
 import CategoriaService from "../../service/CategoriaService";
 import Categoria from "../../models/Categoria";
 
-function FormCategoria({ categoriaId }: { categoriaId: number }) {
+function FormCategoria({ categoriaId }: { categoriaId?: number }) {
     const service = new CategoriaService();
     const [categoria, setCategoria] = useState<Categoria>({} as Categoria);
 
@@ -47,7 +47,7 @@ function FormCategoria({ categoriaId }: { categoriaId: number }) {
 
     return (
         <div className="container flex flex-col mx-auto items-center">
-            {categoriaId < 0 ? 
+            {categoriaId ? 
                 <h1 className="text-4xl text-center my-8">Cadastrar Categoria</h1>
                 :
                 <h1 className="text-4xl text-center my-8">Editar Categoria</h1>

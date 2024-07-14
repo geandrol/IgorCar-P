@@ -10,7 +10,7 @@ function ModalCliente({reflash, data}: any) {
         <>
             <Popup
                 trigger={
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white flex flex-row items-center justify-center py-4 px-4 rounded font-bold w-[100%]">
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white flex flex-row items-center justify-center py-4 px-4 rounded-br-3xl font-bold w-[100%]">
                     <FaPlus className="mr-2" size={50} /> {/* Substituindo o ícone externo */}
                             <span>Cadastrar Novo</span>
                     </button>
