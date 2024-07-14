@@ -81,7 +81,7 @@ export default function PageNataServico({cliente, servico}: any) {
                            <p className="text-xs font-semibold leading-4 text-gray-700">{item.produto?.descricao}</p>
                        </div>
                        <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                           <p className="text-xs font-semibold leading-4 text-gray-700">R$ {item.produto?.valorVendal.toFixed(2)}</p>
+                           <p className="text-xs font-semibold leading-4 text-gray-700">{item.produto?.valorVendal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
                        </div>
                    </li>
                    ))}
@@ -120,13 +120,13 @@ export default function PageNataServico({cliente, servico}: any) {
                             <p className="text-xs font-semibold leading-6 text-gray-700">{new Date(servico.fimGarantia).toLocaleDateString()}</p>
                         </div>
                         <div className="min-w-0 flex-auto">
-                            <p className="text-xs font-semibold leading-6 text-gray-700">R$ {servicoNota?.vlrTotalMaoDeObra.toFixed(2)}</p>
+                            <p className="text-xs font-semibold leading-6 text-gray-700">{servicoNota?.vlrTotalMaoDeObra.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
                         </div>
                         <div className="min-w-0 flex-auto">
-                            <p className="text-xs font-semibold leading-6 text-gray-700">R$ {servicoNota?.vlrTotalProdutos.toFixed(2)}</p>
+                            <p className="text-xs font-semibold leading-6 text-gray-700">{servicoNota?.vlrTotalProdutos.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
                         </div>
                         <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                            <p className="text-xs font-semibold leading-6 text-gray-700">R$ {servicoNota?.vlrTotal.toFixed(2)}</p>
+                            <p className="text-xs font-semibold leading-6 text-gray-700">{servicoNota?.vlrTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
                         </div>
                     </li>
                 </ul>

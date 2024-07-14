@@ -38,15 +38,15 @@ function ModalServicoDetails({ servico }: any) {
                     </div>
                     <div className="flex justify-between gap-x-6 py-1">
                         <p>Vlr Produtos</p>
-                        <p className='text-sm'>R$ {servicoDetail.vlrTotalProdutos.toFixed(2)}</p>
+                        <p className='text-sm'>{servicoDetail.vlrTotalProdutos.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
                     </div>
                     <div className="flex justify-between gap-x-6 py-1">
                         <p>Mao de Obra</p>
-                        <p className='text-sm'>R$ {servicoDetail.vlrTotalMaoDeObra.toFixed(2)}</p>
+                        <p className='text-sm'>{servicoDetail.vlrTotalMaoDeObra.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
                     </div>
                     <div className="flex justify-between gap-x-6 py-1">
                         <p>Vlr Total</p>
-                        <p className='text-sm'>R$ {servicoDetail.vlrTotal.toFixed(2)}</p>
+                        <p className='text-sm'>{servicoDetail.vlrTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
                     </div>
                     <div className="flex justify-between gap-x-6 py-1">
                         <p className='text-sm'>{servicoDetail.descricao}</p>

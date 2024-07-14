@@ -52,19 +52,19 @@ function ModalListServicos({ cliente }: any) {
 
                                 <div className="flex justify-center items-center min-w-0">
                                     <div className="min-w-0 flex-auto text-center">
-                                        <p className="max-w-[10rem] text-xs font-semibold leading-6 text-gray-900"> R$ {servico.vlrTotalProdutos.toFixed(2)}</p>
+                                        <p className="max-w-[10rem] text-xs font-semibold leading-6 text-gray-900"> {servico.vlrTotalProdutos.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
                                     </div>
                                 </div>
 
                                 <div className="flex justify-center items-center min-w-0">
                                     <div className="min-w-0 flex-auto">
-                                        <p className="max-w-[10rem] text-xs font-semibold leading-6 text-gray-900"> R$ {servico.vlrTotalMaoDeObra.toFixed(2)}</p>
+                                        <p className="max-w-[10rem] text-xs font-semibold leading-6 text-gray-900"> {servico.vlrTotalMaoDeObra.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}</p>
                                     </div>
                                 </div>
 
                                 <div className="flex justify-center items-center min-w-0">
                                     <div className="min-w-0 flex-auto text-center">
-                                        <p className="max-w-[10rem] text-base font-semibold leading-6 text-gray-900"> R$ {servico.vlrTotal.toFixed(2)}</p>
+                                        <p className="max-w-[10rem] text-base font-semibold leading-6 text-gray-900"> {servico.vlrTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
                                     </div>
                                 </div>
                             </li>
