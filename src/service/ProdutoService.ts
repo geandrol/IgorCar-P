@@ -12,6 +12,11 @@ export default class ProdutoService {
         return response.data
     }
 
+    async getAllInactive() {
+        const response = await api.get('produto/insNotActive')
+        return response.data
+    }
+
     async getById(id: number) {
         const response = await api.get(`produto/${id}`)
         return response.data

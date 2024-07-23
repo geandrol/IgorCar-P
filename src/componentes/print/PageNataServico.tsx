@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import Cliente from "../../models/Cliente";
-import Servico from "../../models/Servico";
-import herbie from "../../assets/herbie.png"; 
+import Cliente from "../../models/Cliente"; 
 import igorLogo from "../../assets/IgorLogo.webp"// Importando a imagem
+import Servico from "../../models/Servico";
 
 export default function PageNataServico({cliente, servico}: any) {
 
@@ -43,6 +42,10 @@ export default function PageNataServico({cliente, servico}: any) {
                     <div className="flex flex-row justify-start items-center gap-x-5 sm:px-0">
                         <p className="text-base font-semibold leading-7 text-gray-900">Telefone: </p>
                         <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">(11) 97801-0384</p>
+                    </div>
+                    <div className="flex flex-row justify-start items-center gap-x-5 sm:px-0">
+                        <p className="text-base font-semibold leading-7 text-gray-900">CNPJ: </p>
+                        <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">29.160.972/0001-25</p>
                     </div>
                 </div>
             </div>

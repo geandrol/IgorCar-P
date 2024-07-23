@@ -4,7 +4,7 @@ import { FaCar, FaSyncAlt } from 'react-icons/fa'; // Importando ícones do reac
 import 'reactjs-popup/dist/index.css';
 import Carro from '../../models/Carro';
 import FormCarro from '../form/FormCarro';
-import { FormEvent, useState } from 'react';
+import { useState } from 'react';
 
 function ModalListCarros({carros, usuario}: any) {
 

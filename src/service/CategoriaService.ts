@@ -23,7 +23,8 @@ export default class CategoriaService {
     }
 
     async update(categoria: Categoria) {
-        const response = await api.put('categoria', categoria)
+        const newCat = {...categoria, produtos: []}
+        const response = await api.put('categoria', newCat)
         return response
     }
 

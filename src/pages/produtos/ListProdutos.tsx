@@ -6,7 +6,7 @@ import './ListProdutos.css'
 import ModalProduto from "../../componentes/modal/ModalProduto";
 import ModalDeleteP from "../../componentes/modal/modelDelete/ModelDeleteP";
 import ModalProdutoE from "../../componentes/modal/modelEdite/ModalEditarP";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Categoria from "../../models/Categoria";
 
 
@@ -14,6 +14,8 @@ export default function ListProdutos() {
     let navigate = useNavigate()
     const [buscarPorNome, setBuscarPorNome] = useState("");
     const [buscarPorCategoria, setBuscarPorCategoria] = useState("");
+
+
 
     function voltar() {
         navigate('/estoque')
@@ -25,6 +27,8 @@ export default function ListProdutos() {
 
     const [produtos, setProdutos] = useState<Produto[]>([]);
 
+    const [produtosInactive, setProdutosInactive] = useState<Produto[]>([]);
+
     const [categorias, setCategorias] = useState<Categoria[]>([]);
 
     async function getAllProduto() {
@@ -32,6 +36,13 @@ export default function ListProdutos() {
         const response = await service.getAll();
         console.log(response);
         setProdutos(response);
+    }
+
+    async function getAllProdutoInactive() {
+
+        const response = await service.getAllInactive();
+        console.log(response);
+        setProdutosInactive(response);
     }
 
     async function getAllCategorias() {
@@ -48,9 +59,15 @@ export default function ListProdutos() {
     useEffect(() => {
         getAllProduto();
         getAllCategorias();
+        getAllProdutoInactive()
     }, []);
 
     const filteredProdutos = produtos.filter((produto) =>
+        produto.nome.toLowerCase().includes(buscarPorNome.toLowerCase()) &&
+        produto.categoria?.descricao.includes(buscarPorCategoria)
+    );
+
+    const filteredProdutosInactive = produtosInactive.filter((produto) =>
         produto.nome.toLowerCase().includes(buscarPorNome.toLowerCase()) &&
         produto.categoria?.descricao.includes(buscarPorCategoria)
     );
@@ -95,13 +112,14 @@ export default function ListProdutos() {
 
 
             <div className="mx-7">
+                <h1>Produtos Ativo</h1>
                 <table className="min-w-full bg-white">
                     <thead>
                         <tr>
-                            <th className="py-2">Descrição</th>
+                            <th className="py-2">Nome</th>
                             <th className="py-2">Marca</th>
                             <th className="py-2">Modelo</th>
-                            <th className="py-2">Nome</th>
+                            <th className="py-2">Descrição</th>
                             <th className="py-2">Quantidade</th>
                             <th className="py-2">Valor Custo</th>
                             <th className="py-2">Valor Venda</th>
@@ -115,10 +133,10 @@ export default function ListProdutos() {
                         {
                         filteredProdutos.map((item) =>
                             <tr className="border" key={item.id}>
-                                <td className="text-center">{item.descricao}</td>
+                                <td className="text-center">{item.nome}</td>
                                 <td className="text-center">{item.marca}</td>
                                 <td className="text-center">{item.modelo}</td>
-                                <td className="text-center">{item.nome}</td>
+                                <td className="text-center">{item.descricao}</td>
                                 <td className={`text-center ${item.categoria && item.quantidade <= item.categoria.qtdMin ? 'bg-red-500' : ''}`}>
                                     {item.quantidade}
                                 </td>
@@ -128,7 +146,51 @@ export default function ListProdutos() {
                                 <td className="text-center">{item.categoria?.qtdMin}</td>
                                 <td className=" px-4 py-2 flex justify-around space-x-2 ">
                                     <ModalProdutoE productId={item.id} />
-                                    <ModalDeleteP productId={item.id} />
+                                    <ModalDeleteP productId={item.id} isDelete={true} />
+                                </td>
+                            </tr>
+                            
+                        )}
+                    </tbody>
+                </table>
+            </div>
+
+            <div className="mx-7 mt-10">
+                <h1>Produtos Inativo</h1>
+                <table className="min-w-full bg-white">
+                    <thead>
+                        <tr>
+                            <th className="py-2">Nome</th>
+                            <th className="py-2">Marca</th>
+                            <th className="py-2">Modelo</th>
+                            <th className="py-2">Descrição</th>
+                            <th className="py-2">Quantidade</th>
+                            <th className="py-2">Valor Custo</th>
+                            <th className="py-2">Valor Venda</th>
+                            <th className="py-2">Categoria</th>
+                            <th className="py-2">Qtd Min</th>
+                            <th className="py-2">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody className="border">
+
+                        {
+                        filteredProdutosInactive.map((item) =>
+                            <tr className="border" key={item.id}>
+                                <td className="text-center">{item.nome}</td>
+                                <td className="text-center">{item.marca}</td>
+                                <td className="text-center">{item.modelo}</td>
+                                <td className="text-center">{item.descricao}</td>
+                                <td className={`text-center ${item.categoria && item.quantidade <= item.categoria.qtdMin ? 'bg-red-500' : ''}`}>
+                                    {item.quantidade}
+                                </td>
+                                <td className="text-center">{item.valorCusto.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+                                <td className="text-center">{item.valorVendal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+                                <td className="text-center">{item.categoria?.descricao}</td>
+                                <td className="text-center">{item.categoria?.qtdMin}</td>
+                                <td className=" px-4 py-2 flex justify-around space-x-2 ">
+                                    <ModalProdutoE productId={item.id} />
+                                    <ModalDeleteP productId={item.id} isDelete={false}/>
                                 </td>
                             </tr>
                             

@@ -48,9 +48,9 @@ function FormCategoria({ categoriaId }: { categoriaId?: number }) {
     return (
         <div className="container flex flex-col mx-auto items-center">
             {categoriaId ? 
-                <h1 className="text-4xl text-center my-8">Cadastrar Categoria</h1>
-                :
                 <h1 className="text-4xl text-center my-8">Editar Categoria</h1>
+                :
+                <h1 className="text-4xl text-center my-8">Cadastrar Categoria</h1>
             }
 
             <form onSubmit={handleNovaCategoria} className="flex flex-col w-1/2 gap-4">

@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import Carro from "../../models/Carro";
 import Servico from "../../models/Servico";
 import Produto from "../../models/Produto";
@@ -22,10 +22,12 @@ function FormServico({ carros, idCliente }: any) {
     const produtoService = new ProdutoService();
     const servicoService = new ServicoService(); // Instanciei o serviço de Servico
 
+    /*
     function getProdutoId(id: number) {
         const p = produtos.find(p => p.id === id);
         setProdutoSelect([...produtoSelect, p as Produto]);
-    }
+
+    }*/
 
     async function handleNovoServico(e: FormEvent) {
         e.preventDefault();
@@ -48,6 +50,8 @@ function FormServico({ carros, idCliente }: any) {
 
         } catch (error) {
             console.log(error);
+            carroList.length
+            console.log(produtosDto)
         }
     }
 
@@ -56,6 +60,8 @@ function FormServico({ carros, idCliente }: any) {
             const response = await produtoService.getAll();
             setProdutos(response);
         }
+
+        setServico({} as Servico)
 
         setCarroList(carros);
         getAllProdutos();
@@ -142,7 +148,7 @@ function FormServico({ carros, idCliente }: any) {
                 </div>
 
                 <div className="flex flex-col w-[47%] gap-2">
-                    <label htmlFor="marca">Valor de custo do produto</label>
+                    <label htmlFor="marca">Valor do serviço</label>
                     <input
                         type="text"
                         placeholder="Valor mao de obra"
