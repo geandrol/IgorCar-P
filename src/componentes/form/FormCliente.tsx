@@ -46,7 +46,7 @@ function FormCliente({ reflash, data}: any) {
                 <form ref={formElement} onSubmit={handleSubmit} className="flex flex-col gap-4">
                     <div className="flex flex-row gap-2">
                         <div className="flex flex-col gap-2">
-                            <label htmlFor="nome">Nome</label>
+                            <label className="text-xl" htmlFor="nome">Nome</label>
                             <input
                                 type="text"
                                 placeholder="Nome"
@@ -58,7 +58,7 @@ function FormCliente({ reflash, data}: any) {
                             />
                         </div>
                         <div className="flex flex-col gap-2">
-                            <label htmlFor="placa">Contato</label>
+                            <label className="text-xl" htmlFor="placa">Contato</label>
                             <input
                                 type="text"
                                 placeholder="Contato"

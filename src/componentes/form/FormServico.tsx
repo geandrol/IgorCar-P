@@ -87,7 +87,7 @@ function FormServico({ carros, idCliente }: any) {
 
             <form onSubmit={handleNovoServico} className="flex flex-row justify-center flex-wrap w-full p-2 gap-4">
                 <div className="flex flex-col w-6/12 gap-2">
-                    <p>Carro</p>
+                    <p className="text-xl">Carro</p>
                     <select
                         name="carro"
                         required
@@ -106,7 +106,7 @@ function FormServico({ carros, idCliente }: any) {
                     </select>
                 </div>
                 <div className="flex flex-col w-[38%] gap-2">
-                    <p>Produtos</p>
+                    <p className="text-xl">Produtos</p>
                     <select
                         name="produto"
                         id="produto"
@@ -129,7 +129,7 @@ function FormServico({ carros, idCliente }: any) {
                         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded h-10">+</button>
                 </div>
                 <div className="flex flex-col w-6/12 gap-2">
-                    <label htmlFor="marca">Fim da Garantia</label>
+                    <label className="text-xl" htmlFor="marca">Fim da Garantia</label>
                     <input
                         type="date"
                         placeholder="Garantia"
@@ -148,7 +148,7 @@ function FormServico({ carros, idCliente }: any) {
                 </div>
 
                 <div className="flex flex-col w-[47%] gap-2">
-                    <label htmlFor="marca">Valor do serviço</label>
+                    <label className="text-xl" htmlFor="marca">Valor do serviço</label>
                     <input
                         type="text"
                         placeholder="Valor mao de obra"
@@ -171,7 +171,7 @@ function FormServico({ carros, idCliente }: any) {
                 </div>
 
                 <div className="flex flex-col gap-2 w-[99%]">
-                    <label htmlFor="descricao">Descrição</label>
+                    <label className="text-xl" htmlFor="descricao">Descrição</label>
                     <textarea
                         placeholder="Descrição"
                         name="descricao"

@@ -84,7 +84,7 @@ export default function ListProdutos() {
         
             <div className="flex justify-center w-[100%] mx-auto">
                 <div className="flex justify-center m-5">
-                    <h1 className="pe-2">Buscar por nome:</h1>
+                    <h1 className="pe-2 text-xl">Buscar por nome:</h1>
                     <input
                         className="border-2 border-sky-500"
                         type="text"
@@ -95,7 +95,7 @@ export default function ListProdutos() {
                 </div>
 
                 <div className="flex justify-center m-5">
-                    <h1 className="pe-2">Buscar por categoria:</h1>
+                    <h1 className="pe-2 text-xl">Buscar por categoria:</h1>
                     <select
                         name="categoria"
                         value={buscarPorCategoria}
@@ -112,20 +112,20 @@ export default function ListProdutos() {
 
 
             <div className="mx-7">
-                <h1>Produtos Ativo</h1>
+                <h1 className="text-xl">Produtos Ativo</h1>
                 <table className="min-w-full bg-white">
                     <thead>
                         <tr>
-                            <th className="py-2">Nome</th>
-                            <th className="py-2">Marca</th>
-                            <th className="py-2">Modelo</th>
-                            <th className="py-2">Descrição</th>
-                            <th className="py-2">Quantidade</th>
-                            <th className="py-2">Valor Custo</th>
-                            <th className="py-2">Valor Venda</th>
-                            <th className="py-2">Categoria</th>
-                            <th className="py-2">Qtd Min</th>
-                            <th className="py-2">Ações</th>
+                            <th className="py-2 text-xl">Nome</th>
+                            <th className="py-2 text-xl">Marca</th>
+                            <th className="py-2 text-xl">Modelo</th>
+                            <th className="py-2 text-xl">Descrição</th>
+                            <th className="py-2 text-xl">Quantidade</th>
+                            <th className="py-2 text-xl">Valor Custo</th>
+                            <th className="py-2 text-xl">Valor Venda</th>
+                            <th className="py-2 text-xl">Categoria</th>
+                            <th className="py-2 text-xl">Qtd Min</th>
+                            <th className="py-2 text-xl">Ações</th>
                         </tr>
                     </thead>
                     <tbody className="border">
@@ -133,17 +133,17 @@ export default function ListProdutos() {
                         {
                         filteredProdutos.map((item) =>
                             <tr className="border" key={item.id}>
-                                <td className="text-center">{item.nome}</td>
-                                <td className="text-center">{item.marca}</td>
-                                <td className="text-center">{item.modelo}</td>
-                                <td className="text-center">{item.descricao}</td>
-                                <td className={`text-center ${item.categoria && item.quantidade <= item.categoria.qtdMin ? 'bg-red-500' : ''}`}>
+                                <td className="text-center text-xl">{item.nome}</td>
+                                <td className="text-center text-xl">{item.marca}</td>
+                                <td className="text-center text-xl">{item.modelo}</td>
+                                <td className="text-center text-xl">{item.descricao}</td>
+                                <td className={`text-center text-xl ${item.categoria && item.quantidade <= item.categoria.qtdMin ? 'bg-red-500' : ''}`}>
                                     {item.quantidade}
                                 </td>
-                                <td className="text-center">{item.valorCusto.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
-                                <td className="text-center">{item.valorVendal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
-                                <td className="text-center">{item.categoria?.descricao}</td>
-                                <td className="text-center">{item.categoria?.qtdMin}</td>
+                                <td className="text-center text-xl">{item.valorCusto.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+                                <td className="text-center text-xl">{item.valorVendal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+                                <td className="text-center text-xl">{item.categoria?.descricao}</td>
+                                <td className="text-center text-xl">{item.categoria?.qtdMin}</td>
                                 <td className=" px-4 py-2 flex justify-around space-x-2 ">
                                     <ModalProdutoE productId={item.id} />
                                     <ModalDeleteP productId={item.id} isDelete={true} />
@@ -156,20 +156,20 @@ export default function ListProdutos() {
             </div>
 
             <div className="mx-7 mt-10">
-                <h1>Produtos Inativo</h1>
+                <h1 className="text-xl">Produtos Inativo</h1>
                 <table className="min-w-full bg-white">
                     <thead>
                         <tr>
-                            <th className="py-2">Nome</th>
-                            <th className="py-2">Marca</th>
-                            <th className="py-2">Modelo</th>
-                            <th className="py-2">Descrição</th>
-                            <th className="py-2">Quantidade</th>
-                            <th className="py-2">Valor Custo</th>
-                            <th className="py-2">Valor Venda</th>
-                            <th className="py-2">Categoria</th>
-                            <th className="py-2">Qtd Min</th>
-                            <th className="py-2">Ações</th>
+                            <th className="py-2 text-xl">Nome</th>
+                            <th className="py-2 text-xl">Marca</th>
+                            <th className="py-2 text-xl">Modelo</th>
+                            <th className="py-2 text-xl">Descrição</th>
+                            <th className="py-2 text-xl">Quantidade</th>
+                            <th className="py-2 text-xl">Valor Custo</th>
+                            <th className="py-2 text-xl">Valor Venda</th>
+                            <th className="py-2 text-xl">Categoria</th>
+                            <th className="py-2 text-xl">Qtd Min</th>
+                            <th className="py-2 text-xl">Ações</th>
                         </tr>
                     </thead>
                     <tbody className="border">
@@ -177,17 +177,17 @@ export default function ListProdutos() {
                         {
                         filteredProdutosInactive.map((item) =>
                             <tr className="border" key={item.id}>
-                                <td className="text-center">{item.nome}</td>
-                                <td className="text-center">{item.marca}</td>
-                                <td className="text-center">{item.modelo}</td>
-                                <td className="text-center">{item.descricao}</td>
-                                <td className={`text-center ${item.categoria && item.quantidade <= item.categoria.qtdMin ? 'bg-red-500' : ''}`}>
+                                <td className="text-center text-xl">{item.nome}</td>
+                                <td className="text-center text-xl">{item.marca}</td>
+                                <td className="text-center text-xl">{item.modelo}</td>
+                                <td className="text-center text-xl">{item.descricao}</td>
+                                <td className={`text-center text-xl ${item.categoria && item.quantidade <= item.categoria.qtdMin ? 'bg-red-500' : ''}`}>
                                     {item.quantidade}
                                 </td>
-                                <td className="text-center">{item.valorCusto.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
-                                <td className="text-center">{item.valorVendal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
-                                <td className="text-center">{item.categoria?.descricao}</td>
-                                <td className="text-center">{item.categoria?.qtdMin}</td>
+                                <td className="text-center text-xl">{item.valorCusto.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+                                <td className="text-center text-xl">{item.valorVendal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+                                <td className="text-center text-xl">{item.categoria?.descricao}</td>
+                                <td className="text-center text-xl">{item.categoria?.qtdMin}</td>
                                 <td className=" px-4 py-2 flex justify-around space-x-2 ">
                                     <ModalProdutoE productId={item.id} />
                                     <ModalDeleteP productId={item.id} isDelete={false}/>

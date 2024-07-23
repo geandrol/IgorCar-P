@@ -54,7 +54,7 @@ function FormCarro({data, usuario, add, edit}: any) {
                 <form ref={formElement} onSubmit={handleSubmit} className="flex flex-col gap-4">
                     <div className="flex flex-row gap-2">
                         <div className="flex flex-col gap-2">
-                            <label htmlFor="modelo">Modelo</label>
+                            <label className="text-xl" htmlFor="modelo">Modelo</label>
                             <input
                                 type="text"
                                 placeholder="Modelo"
@@ -66,7 +66,7 @@ function FormCarro({data, usuario, add, edit}: any) {
                             />
                         </div>
                         <div className="flex flex-col gap-2">
-                            <label htmlFor="placa">Placa</label>
+                            <label className="text-xl" htmlFor="placa">Placa</label>
                             <input
                                 type="text"
                                 placeholder="Placa"

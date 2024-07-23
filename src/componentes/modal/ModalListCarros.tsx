@@ -1,19 +1,34 @@
 import Popup from 'reactjs-popup';
-import { FaCar, FaSyncAlt } from 'react-icons/fa'; // Importando ícones do react-icons
+import { FaCar, FaSyncAlt, FaTrash } from 'react-icons/fa'; // Importando ícones do react-icons
 
 import 'reactjs-popup/dist/index.css';
 import Carro from '../../models/Carro';
 import FormCarro from '../form/FormCarro';
 import { useState } from 'react';
+import CarroService from '../../service/CarroService';
 
 function ModalListCarros({carros, usuario}: any) {
 
     const [carroSelected, setCarroSelected] = useState<Carro>();
     const [carrosAtualizados, setCarrosAtualizados] = useState<Carro[]>(carros);
 
+    const service = new CarroService();
 
     function addCarro(carroNew: Carro) {
         setCarrosAtualizados([...carrosAtualizados, carroNew])
+    }
+
+    async function deletarCarro(id?:number, descricao?: string) {
+       
+        if(confirm(`Deseja deletar o carro ${id} - ${descricao} `)) {
+            try {
+                await service.delete(id ?? 0);
+                alert('Carro apagado com sucesso');
+                window.location.reload();
+            } catch (error) {
+                alert('Erro ao apagar o carro, verifique se ja tem um serviço cadastrado para ele!');
+            }
+        }
     }
 
     function editCarro(carroEdit: Carro) {
@@ -42,7 +57,7 @@ function ModalListCarros({carros, usuario}: any) {
                 onClose={() => console.log('close')}
             >
                 <div className="p-5">
-                    <ul role="list" className="divide-y divide-gray-100">
+                    <ul role="list" className="divide-y divide-gray-100  max-h-28 overflow-y-auto">
                         {carrosAtualizados.map((carro: Carro) => (
                                 <li key={carro.id} className="flex justify-between gap-x-6 py-5">
                                     <div className="flex min-w-0 gap-x-4">
@@ -52,13 +67,18 @@ function ModalListCarros({carros, usuario}: any) {
                                             <p className="mt-1 truncate text-xs leading-5 text-gray-500">{carro.placa}</p>
                                         </div>
                                     </div>
-                                    <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                                    <div className="hidden shrink-0 sm:flex sm:flex-row sm:items-end sm:justify-around">
                                         <button 
                                             onClick={() => selectCar(carro)}
-                                            className="bg-indigo-300 hover:bg-indigo-100 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
+                                            className="bg-indigo-300 hover:bg-indigo-100 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center mr-4">
                                             <FaSyncAlt size={25} /> {/* Substituindo ícone externo */}
                                         </button>
+                                        <button onClick={() => deletarCarro(carro.id, carro.modelo)} 
+                                            className="bg-red-400 hover:bg-red-100 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
+                                            <FaTrash size={25} />
+                                        </button>
                                     </div>
+                                    
                                 </li>
                         ))}
                     </ul>

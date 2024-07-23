@@ -39,7 +39,7 @@ export default function ListCategorias() {
 
         <>
             <div className="flex flex-row">
-                <button className="bg-red-500 hover:bg-red-700 text-white flex flex-row items-center justify-center py-4 px-4 rounded-bl-3xl font-bold w-3/12 " onClick={voltar}>
+                <button className="bg-red-500 hover:bg-red-700 text-white flex flex-row items-center justify-center py-4 px-4 rounded-bl-3xl font-bold w-3/12 text-xl" onClick={voltar}>
                     <FaArrowLeft className="mr-2" size={20} /> {/* Substituindo o ícone externo */}
                     <span>Voltar</span>
                 </button>  
@@ -47,9 +47,9 @@ export default function ListCategorias() {
             </div>
 
             <div className="flex justify-center m-5">
-                <h1 className="pe-2">Buscar por categoria: </h1>
+                <h1 className="pe-2 text-xl">Buscar por categoria: </h1>
                 <input
-                    className="border-2 border-sky-500"
+                    className="border-2 border-sky-500 text-xl"
                     type="text"
                     placeholder="Buscar por nome..."
                     value={buscarPorCategoria}
@@ -59,7 +59,7 @@ export default function ListCategorias() {
 
             <div className="flex justify-center">
                 <div className=''>
-                <table className="min-w-full bg-white">
+                <table className="min-w-full bg-white text-xl">
                                 <thead>
                                     <tr>
                                         <th className="py-2">Descrição</th>

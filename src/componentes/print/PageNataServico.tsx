@@ -79,7 +79,7 @@ export default function PageNataServico({cliente, servico}: any) {
                         </div>
                     </li>
                    {servicoNota?.produtos.map((item) => (
-                       <li className="flex justify-between gap-x-6 py-3">
+                       <li key={item.id} className="flex justify-between gap-x-6 py-3">
                        <div className="min-w-0 flex-auto">
                            <p className="text-xs font-semibold leading-4 text-gray-700">{item.produto?.descricao}</p>
                        </div>

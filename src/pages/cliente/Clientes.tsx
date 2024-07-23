@@ -53,7 +53,7 @@ export default function Clientes() {
 
             <div className="container mx-auto flex flex-col items-center">
             <div className="flex justify-center m-5">
-                <h1 className="pe-2">Buscar por categoria: </h1>
+                <h1 className="pe-2 text-xl">Buscar por categoria: </h1>
                 <input
                     className="border-2 border-sky-500"
                     type="text"
@@ -65,15 +65,15 @@ export default function Clientes() {
                 <div className="w-[85%] flex flex-wrap justify-center">
                     {
                         filteredNome.map((item) =>
-                            <div key={item.id} className="max-w-sm min-w-[250px] rounded overflow-hidden shadow-lg h-52 m-2">
+                            <div key={item.id} className="max-w-sm min-w-[250px] rounded overflow-hidden shadow-lg h-56 m-2">
                                 <div className="px-6 py-4">
                                     <FaUserCircle size={50} /> {/* Substituindo o ícone externo */}
                                 </div>
                                 <div className="px-6">
-                                    <div className="font-bold text-sm mb-2">{item.nome}</div>
+                                    <div className="font-bold text-xl mb-2">{item.nome}</div>
                                 </div>
                                 <div className="px-6">
-                                    <div className="text-sm mb-5">{item.contato}</div>
+                                    <div className="text-xl mb-5">{item.contato}</div>
                                 </div>
                                 <div className="flex justify-around items-center">
                                     <ModalListServicos cliente={item} />

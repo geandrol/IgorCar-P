@@ -104,7 +104,7 @@ function FormProduto({ productId } : {productId?: number}) {
             <form onSubmit={handleNovoProduto} className="flex flex-col w-1/2 gap-4">
 
             <div className="flex flex-col gap-2">
-                    <p>Categoria do Produto</p>
+                    <p className="text-xl">Categoria do Produto</p>
                     <select
                         name="categoria"
                         id="categoria"
@@ -123,7 +123,7 @@ function FormProduto({ productId } : {productId?: number}) {
                     </select>
                 </div>
                 <div className="flex flex-col gap-2">
-                    <label htmlFor="descricao">Nome do produto</label>
+                    <label className="text-xl" htmlFor="descricao">Nome do produto</label>
                     <input
                         type="text"
                         placeholder="Nome"
@@ -135,7 +135,7 @@ function FormProduto({ productId } : {productId?: number}) {
                     />
                 </div>
                 <div className="flex flex-col gap-2">
-                    <label htmlFor="nome">Descrição do produto</label>
+                    <label className="text-xl" htmlFor="nome">Descrição do produto</label>
                     <input
                         type="text"
                         placeholder="Descrição"
@@ -147,7 +147,7 @@ function FormProduto({ productId } : {productId?: number}) {
                     />
                 </div>
                 <div className="flex flex-col gap-2">
-                    <label htmlFor="marca">Marca do produto</label>
+                    <label className="text-xl" htmlFor="marca">Marca do produto</label>
                     <input
                         type="text"
                         placeholder="Marca"
@@ -159,7 +159,7 @@ function FormProduto({ productId } : {productId?: number}) {
                     />
                 </div>
                 <div className="flex flex-col gap-2">
-                    <label htmlFor="marca">Modelo do produto</label>
+                    <label className="text-xl" htmlFor="marca">Modelo do produto</label>
                     <input
                         type="text"
                         placeholder="Modelo"
@@ -171,7 +171,7 @@ function FormProduto({ productId } : {productId?: number}) {
                     />
                 </div>
                 <div className="flex flex-col gap-2">
-                    <label htmlFor="marca">Quantidade do produto</label>
+                    <label className="text-xl" htmlFor="marca">Quantidade do produto</label>
                     <input
                         type="text"
                         placeholder="Quantidade"
@@ -183,7 +183,7 @@ function FormProduto({ productId } : {productId?: number}) {
                     />
                 </div>
                 <div className="flex flex-col gap-2">
-                    <label htmlFor="marca">Valor de custo do produto</label>
+                    <label className="text-xl" htmlFor="marca">Valor de custo do produto</label>
                     <input
                         type="text"
                         placeholder="ValorCusto"
@@ -195,7 +195,7 @@ function FormProduto({ productId } : {productId?: number}) {
                     />
                 </div>
                 <div className="flex flex-col gap-2">
-                    <label htmlFor="marca">Valor de venda do produto</label>
+                    <label className="text-xl" htmlFor="marca">Valor de venda do produto</label>
                     <input
                         type="text"
                         placeholder="ValvendaorCusto"

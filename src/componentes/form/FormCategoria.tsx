@@ -55,7 +55,7 @@ function FormCategoria({ categoriaId }: { categoriaId?: number }) {
 
             <form onSubmit={handleNovaCategoria} className="flex flex-col w-1/2 gap-4">
                 <div className="flex flex-col gap-2">
-                    <label htmlFor="descricao">Descrição da categoria</label>
+                    <label className="text-xl" htmlFor="descricao">Descrição da categoria</label>
                     <input
                         type="text"
                         placeholder="Categoria"
@@ -67,7 +67,7 @@ function FormCategoria({ categoriaId }: { categoriaId?: number }) {
                     />
                 </div>
                 <div className="flex flex-col gap-2">
-                    <label htmlFor="qtdMin">Quantidade mínima</label>
+                    <label className="text-xl" htmlFor="qtdMin">Quantidade mínima</label>
                     <input
                         type="number"
                         placeholder="quantidade minima"

@@ -1,5 +1,5 @@
 import Popup from 'reactjs-popup';
-import { FaFileAlt } from 'react-icons/fa'; // Importando ícone do react-icons
+import { FaFileAlt, FaTrash } from 'react-icons/fa'; // Importando ícone do react-icons
 
 import 'reactjs-popup/dist/index.css';
 import Servico from '../../models/Servico';
@@ -7,13 +7,32 @@ import { useEffect } from 'react';
 import ModalServicoDetails from './ModalServicoDetails';
 import PrintNotaServico from '../print/PrintNotaServico';
 import FormServico from '../form/FormServico';
+import ServicoService from '../../service/ServicoService';
+
+
+
 
 function ModalListServicos({ cliente }: any) {
 
+    const service = new ServicoService();
 
     useEffect(() => {
         console.log(cliente.servicos)
     }, [])
+
+    async function deletarServico(id?:number, descricao?: string) {
+       
+        if(confirm(`Deseja deletar o servico ${id} - ${descricao} `)) {
+            try {
+                await service.delete(id ?? 0);
+                alert('Servico apagado com sucesso');
+                window.location.reload();
+            } catch (error) {
+                alert('Erro ao apagar o produto');
+            }
+        }
+    }
+
     return (
         <>
             <Popup
@@ -24,8 +43,8 @@ function ModalListServicos({ cliente }: any) {
                 }
                 modal
             >
-                <div>
-                    <ul role="list" className="divide-y divide-gray-100 px-2">
+                <div className="">
+                    <ul role="list" className="divide-y divide-gray-100 px-2 max-h-28 overflow-y-auto">
                         {cliente.servicos.map((servico: Servico) => (
                             <li key={servico.id} className="flex justify-between gap-x-6 py-5">
                                 <div className="flex min-w-0 gap-x-4">
@@ -42,6 +61,11 @@ function ModalListServicos({ cliente }: any) {
                                         </div>
                                         <div className="min-w-0 flex-auto text-center">
                                             <PrintNotaServico cliente={cliente} servico={servico} />
+                                        </div>
+                                        <div className="min-w-0 flex-auto text-center">
+                                            <button onClick={() => deletarServico(servico.id, servico.descricao)} className="bg-red-400 hover:bg-red-100 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
+                                                <FaTrash />
+                                            </button>
                                         </div>
                                     </div>
                                     <div className="min-w-0 flex-auto">
